@@ -1,0 +1,24 @@
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  jest:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: [14, 16]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - run: |
+          yarn
+          yarn eslint
+          yarn shell
+          yarn jest --forceExit

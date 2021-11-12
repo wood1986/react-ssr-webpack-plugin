@@ -1,0 +1,96 @@
+{
+  "name": "react-ssr-webpack-plugin",
+  "keywords": [
+    "react",
+    "ssr",
+    "webpack"
+  ],
+  "version": "1.0.0",
+  "homepage": "https://github.com/wood1986/react-ssr-webpack-plugin",
+  "bugs": "https://github.com/wood1986/react-ssr-webpack-plugin/issues",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "eslint": "eslint -c ./.eslintrc.js --ext .js --ext .jsx --ext .mjs --ext .cjs .",
+    "app:1.0": "webpack --config=./examples/app/1.0/webpack.config.js --mode=production",
+    "app:2.0": "webpack --config=./examples/app/2.0/webpack.config.js --mode=production",
+    "app:1.0:start": "webpack serve --config=./examples/app/1.0/webpack.config.js --mode=development",
+    "app:2.0:start": "webpack serve --config=./examples/app/2.0/webpack.config.js --mode=development",
+    "shell": "webpack --config=./examples/shell/webpack.config.js --mode=production",
+    "shell:start": "yarn app:1.0 && yarn app:2.0 && cp ./examples/app/dist/2.0.json ./examples/app/dist/default.json && yarn shell && node --inspect ./examples/shell/dist/index.js ./examples/app/dist",
+    "relay-compiler": "relay-compiler --src ./examples/relay --schema ./examples/relay/graphql/schema.graphql",
+    "relay": "webpack --config=./examples/relay/webpack.config.js --mode=production",
+    "relay:start": "webpack serve --config=./examples/relay/webpack.config.js --mode=development",
+    "release": "standard-version",
+    "jest": "jest --no-cache",
+    "postinstall": "husky install && yarn relay-compiler"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-react",
+        {
+          "runtime": "automatic"
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.3",
+    "@babel/preset-react": "^7.16.0",
+    "@babel/runtime": "^7.16.3",
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
+    "@graphql-tools/schema": "^8.3.1",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-relay": "^12.0.0",
+    "babel-plugin-styled-components": "^1.13.3",
+    "bootstrap": "^5.1.3",
+    "copy-webpack-plugin": "^9.1.0",
+    "cors": "^2.8.5",
+    "css-loader": "^6.5.1",
+    "eslint": "^8.2.0",
+    "eslint-plugin-jest": "^25.2.4",
+    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-webpack-plugin": "^3.1.1",
+    "express-graphql": "^0.12.0",
+    "file-loader": "^6.2.0",
+    "graphql": "^15.7.2",
+    "husky": "^7.0.4",
+    "jest": "^27.3.1",
+    "mini-css-extract-plugin": "^2.4.4",
+    "morgan": "^1.10.0",
+    "polka": "^0.5.2",
+    "puppeteer": "^11.0.0",
+    "react": "18.0.0-alpha-6ecad79cc-20211006",
+    "react-dom": "18.0.0-alpha-6ecad79cc-20211006",
+    "react-is": "18.0.0-alpha-6ecad79cc-20211006",
+    "react-relay": "^12.0.0",
+    "react-relay-network-modern": "^6.2.0",
+    "relay-compiler": "^12.0.0",
+    "relay-runtime": "^12.0.0",
+    "scheduler": "^0.20.2",
+    "selfsigned": "^1.10.11",
+    "serve-index": "^1.9.1",
+    "serve-static": "^1.14.1",
+    "standard-version": "^9.3.2",
+    "styled-components": "^5.3.3",
+    "terser-webpack-plugin": "^5.2.5",
+    "webpack": "^5.64.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.4.0"
+  },
+  "peerDependencies": {
+    "webpack": "^5.29.0",
+    "webpack-dev-server": "^4.0.0"
+  },
+  "dependencies": {
+    "fs-monkey": "^1.0.3"
+  },
+  "resolutions": {
+    "react-is": "18.0.0-alpha-6ecad79cc-20211006"
+  },
+  "packageManager": "yarn@3.1.0"
+}

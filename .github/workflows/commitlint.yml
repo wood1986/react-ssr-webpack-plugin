@@ -1,0 +1,27 @@
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - edited
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  commitlint:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [16]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - name: lint commit
+        run: |
+          echo ${{ github.event.pull_request.title }}
+          yarn
+          echo '${{ github.event.pull_request.title }}' | yarn commitlint

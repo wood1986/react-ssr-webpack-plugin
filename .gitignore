@@ -1,0 +1,11 @@
+node_modules
+dist
+__generated__
+.DS_Store
+yarn-error.log
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

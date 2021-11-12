@@ -1,0 +1,36 @@
+interface Config {
+  id: ID!
+  component: String!
+  configs: [Config!]!
+}
+
+type NavigationItemConfig implements Config {
+  id: ID!
+  component: String!
+  configs: [Config!]!
+  displayText: String!
+  url: String!
+}
+
+type NavigationConfig implements Config {
+  id: ID!
+  component: String!
+  configs: [Config!]!
+}
+
+type HeaderConfig implements Config {
+  id: ID!
+  component: String!
+  configs: [Config!]!
+}
+
+type PageConfig implements Config {
+  id: ID!
+  component: String!
+  configs: [Config!]!
+}
+
+type Query {
+  config(id: ID!): Config
+  configs(ids: [ID!]!): [Config!]!
+}

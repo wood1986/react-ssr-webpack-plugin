@@ -1,0 +1,135 @@
+{
+  "f4mh4eqb": {
+    "type": "NavigationItemConfig",
+    "component": "NavigationItem",
+    "isEnabled": true,
+    "configs": [],
+    "displayText": "Mac",
+    "url": "//apple.com/ca/mac"
+  },
+  "135mwnf3": {
+    "type": "NavigationItemConfig",
+    "component": "NavigationItem",
+    "isEnabled": true,
+    "configs": [],
+    "displayText": "iPad",
+    "url": "//apple.com/ca/ipad"
+  },
+  "hvcakmn5": {
+    "type": "NavigationItemConfig",
+    "component": "NavigationItem",
+    "isEnabled": false,
+    "configs": [],
+    "displayText": "iPhone",
+    "url": "//apple.com/ca/iphone"
+  },
+  "fyny35jj": {
+    "type": "NavigationItemConfig",
+    "component": "NavigationItem",
+    "isEnabled": true,
+    "configs": [],
+    "displayText": "TV",
+    "url": "//apple.com/ca/tv"
+  },
+  "sf486d79": {
+    "type": "NavigationItemConfig",
+    "component": "NavigationItem",
+    "isEnabled": true,
+    "configs": [],
+    "displayText": "Watch",
+    "url": "//apple.com/ca/watch"
+  },
+  "ggvzhtsp": {
+    "type": "NavigationItemConfig",
+    "component": "NavigationItem",
+    "isEnabled": true,
+    "configs": [],
+    "displayText": "Mac",
+    "url": "//apple.com/mac"
+  },
+  "bz5rj1ye": {
+    "type": "NavigationItemConfig",
+    "component": "NavigationItem",
+    "isEnabled": true,
+    "configs": [],
+    "displayText": "iPad",
+    "url": "//apple.com/ipad"
+  },
+  "xjsev3ee": {
+    "type": "NavigationItemConfig",
+    "component": "NavigationItem",
+    "isEnabled": true,
+    "configs": [],
+    "displayText": "iPhone",
+    "url": "//apple.com/iphone"
+  },
+  "1e6amgnd": {
+    "type": "NavigationItemConfig",
+    "component": "NavigationItem",
+    "isEnabled": false,
+    "configs": [],
+    "displayText": "TV",
+    "url": "//apple.com/tv"
+  },
+  "jg94k6hv": {
+    "type": "NavigationItemConfig",
+    "component": "NavigationItem",
+    "isEnabled": true,
+    "configs": [],
+    "displayText": "Watch",
+    "url": "//apple.com/watch"
+  },
+  "336d9qpq": {
+    "type": "NavigationConfig",
+    "component": "Navigation",
+    "isEnabled": true,
+    "configs": [
+      "ggvzhtsp",
+      "bz5rj1ye",
+      "xjsev3ee",
+      "jg94k6hv",
+      "1e6amgnd"
+    ]
+  },
+  "642anks3": {
+    "type": "NavigationConfig",
+    "component": "Navigation",
+    "isEnabled": true,
+    "configs": [
+      "f4mh4eqb",
+      "hvcakmn5"
+    ]
+  },
+  "9pmpgfsg": {
+    "type": "HeaderConfig",
+    "component": "Header",
+    "isEnabled": true,
+    "configs": [
+      "336d9qpq"
+    ]
+  },
+  "8g5ddk4x": {
+    "type": "HeaderConfig",
+    "component": "Header",
+    "isEnabled": true,
+    "configs": [
+      "642anks3"
+    ]
+  },
+  "3j881qym": {
+    "type": "PageConfig",
+    "component": "Page",
+    "isEnabled": true,
+    "configs": [
+      "9pmpgfsg"
+    ]
+  },
+  "4j9d5peh": {
+    "type": "PageConfig",
+    "component": "Page",
+    "isEnabled": true,
+    "configs": [
+      "8g5ddk4x"
+    ]
+  }
+}
