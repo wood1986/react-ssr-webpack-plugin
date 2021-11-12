@@ -8251,10 +8251,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:18.0.0-alpha-cb8a50619-20210909":
-  version: 18.0.0-alpha-cb8a50619-20210909
-  resolution: "react-is@npm:18.0.0-alpha-cb8a50619-20210909"
-  checksum: 85aa9202b002cfc68b860bc72016a138929b0e538a8278e04f7545bfea3432786c1eb9c9ba46e921c43a5a67625b4ad7de676fb7cac2584584124800b6d223d0
+"react-is@npm:18.0.0-alpha-6ecad79cc-20211006":
+  version: 18.0.0-alpha-6ecad79cc-20211006
+  resolution: "react-is@npm:18.0.0-alpha-6ecad79cc-20211006"
+  checksum: 4c38333781ccdc82d42221bfdcddc0d854d77765784ad31cec4718624a981adedac9d606d4fc07e689873f2036059f2f44d23906bc909da8d46688df77be5db5
   languageName: node
   linkType: hard
 
