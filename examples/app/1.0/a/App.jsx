@@ -1,6 +1,6 @@
 import styled, {createGlobalStyle, css} from "styled-components";
 import {StrictMode} from "react";
-import svg from "../react.svg";
+import svg from "../../react.svg";
 
 const DivWrapper = styled.div`
   display: flex;
@@ -29,16 +29,20 @@ const GlobalStyle = createGlobalStyle`
   }`
 }`;
 
+function Code(props) {
+  return <code>
+    name: {NAME}<br />
+    query.version: {props.query.version}<br />
+    json.__VERSION__: {props.__VERSION__}<br />
+  </code>;
+}
+
 export function App(props) {
   return <StrictMode>
     <GlobalStyle />
     <DivWrapper>
-      <code>
-        name: {NAME}<br />
-        query.version: {props.version}<br />
-        json.__VERSION__: {props.__VERSION__}<br />
-      </code>
       <img src={svg} />
+      <Code {...props} />
     </DivWrapper>
   </StrictMode>;
 }
