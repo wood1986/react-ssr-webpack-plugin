@@ -1,8 +1,7 @@
-// eslint-disable-next-line id-length
-import {App as A} from "./A";
+import {App} from "./App";
 import ReactDOM from "react-dom";
 
 ReactDOM.createRoot(
   document.getElementById("root"),
   {"hydrate": true}
-).render(<A {...globalThis.props} />);
+).render(<App {...globalThis.props} />);

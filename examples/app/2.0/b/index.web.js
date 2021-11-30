@@ -1,5 +1,5 @@
-// eslint-disable-next-line id-length
-import {App as B} from "./B";
+import "bootstrap/dist/css/bootstrap-reboot.min.css";
+import {App} from "./App";
 import ReactDOM from "react-dom";
 
 // if ("serviceWorker" in navigator) {
@@ -9,4 +9,4 @@ import ReactDOM from "react-dom";
 ReactDOM.createRoot(
   document.getElementById("root"),
   {"hydrate": true}
-).render(<B {...globalThis.props} />);
+).render(<App {...globalThis.props} />);

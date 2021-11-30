@@ -1,7 +1,5 @@
 import "bootstrap/dist/css/bootstrap-reboot.min.css";
-
-// eslint-disable-next-line id-length
-import {App as A} from "./A";
+import {App} from "./App";
 import ReactDOM from "react-dom";
 
 const worker = new Worker(new URL("./worker.js", import.meta.url));
@@ -11,4 +9,4 @@ worker.onmessage = console.log;
 ReactDOM.createRoot(
   document.getElementById("root"),
   {"hydrate": true}
-).render(<A {...globalThis.props} />);
+).render(<App {...globalThis.props} />);
