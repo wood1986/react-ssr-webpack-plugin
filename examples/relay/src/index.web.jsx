@@ -21,5 +21,5 @@ const environment = createEnvironment({
 });
 ReactDOM.createRoot(
   document.getElementById("root"),
-  {"hydrate": true}
-).render(<App environment={environment} variables={globalThis.__RELAY_ROOT_VARIABLES__} />);
+  {"hydrate": globalThis.__PROPS__.hydrate}
+).render(<App environment={environment} variables={globalThis.__PROPS__.variables} />);

@@ -21,4 +21,5 @@ jobs:
           yarn
           yarn eslint
           yarn shell
+          yarn shell:all
           yarn jest --forceExit

@@ -18,7 +18,7 @@ globalThis.fetch = fetch;
 export default async (props) => {
   const sheet = new ServerStyleSheet();
 
-  const ssr = props.ssr !== "false";
+  const ssr = props.url.query.ssr !== "false";
   const graphqlUrl = `http://${props.host}:${props.port}/graphql`;
   const network = new RelayNetworkLayer([
     urlMiddleware({
@@ -35,23 +35,27 @@ export default async (props) => {
 
   ssr && (await fetchQuery(environment, rootQuery, variables).toPromise());
   const __html = ssr ? renderToString(sheet.collectStyles(<App environment={environment} variables={variables} />)) : "";
-  return "<!DOCTYPE html>" + renderToStaticMarkup(<html>
+  const html = "<!DOCTYPE html>" + renderToStaticMarkup(<html>
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width,initial-scale=1" />
       <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII="></link>
       <script dangerouslySetInnerHTML={{"__html": [
         `globalThis.__RELAY_STORE__ = ${JSON.stringify(ssr ? environment.getStore().getSource().toJSON() : {}).replace(/</g, "\\u003c")};`,
-        `globalThis.__RELAY_ROOT_VARIABLES__ = ${JSON.stringify(variables).replace(/</g, "\\u003c")};`,
-        `globalThis.__PROPS__ = ${JSON.stringify(props).replace(/</g, "\\u003c")};`,
+        `globalThis.__PROPS__ = ${JSON.stringify({...props, variables, "hydrate": ssr}).replace(/</g, "\\u003c")};`,
         `globalThis.__GRAPHQL_URL__ = ${JSON.stringify(graphqlUrl)};`,
       ].join("")}} />
       <script dangerouslySetInnerHTML={{"__html": __SOURCES__["index.js"]}} />
-      {sheet.getStyleElement()}
+      {ssr ? sheet.getStyleElement() : ""}
     </head>
     <body>
-      <div id="root" dangerouslySetInnerHTML={{__html}} />
+      <div id="root" dangerouslySetInnerHTML={{"__html": __html}}></div>
       <script integrity={__DIGESTS__["vendors.js"]} src={__webpack_public_path__ + __FILES__["vendors.js"]} crossOrigin="anonymous" />
     </body>
   </html>);
+
+  return {
+    html,
+    "statusCode": 200,
+  };
 };

@@ -5,11 +5,10 @@ const url = require("url");
 
 module.exports = (env, argv) => {
   const config = configFn(env, argv);
-  const version = `2.0.${argv.mode}`;
+  const version = `3.0.${argv.mode}`;
 
   config.entry = {
-    "a.web": path.resolve(__dirname, "a", "index.web"),
-    "b.web": path.resolve(__dirname, "b", "index.web"),
+    "index.web": path.resolve(__dirname, "index.web"),
   };
 
   config.devServer = {
@@ -26,8 +25,7 @@ module.exports = (env, argv) => {
     new ReactSSRWebpackPlugin(
       {
         "entry": {
-          "a.node": path.resolve(__dirname, "a", "index.node"),
-          "b.node": path.resolve(__dirname, "b", "index.node"),
+          "index.node": path.resolve(__dirname, "index.node"),
         },
         "resolve": {
           "extensions": [".cjs", ".jsx", ".js", ".mjs"],
@@ -36,8 +34,8 @@ module.exports = (env, argv) => {
       {
         "routes": [
           {
-            "pattern": "/:entry",
-            "entry": ({params}) => ["a.node", "b.node"].includes(params.entry) ? params.entry : null,
+            "pattern": "*",
+            "entry": () => "index.node",
           },
         ],
         version,
