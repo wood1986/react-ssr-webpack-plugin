@@ -1,5 +1,5 @@
 const path = require("path");
-const {ReactSSRWebpackPlugin, ReactSSRMiddleware} = require("../../");
+const {ReactSSRWebpackPlugin, ReactSSRMiddleware} = require("../../src");
 const url = require("url");
 const graphql = require("./graphql");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -9,6 +9,7 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = (env, argv) => { // eslint-disable-line max-lines-per-function
   const PROD = argv.mode === "production";
+  const version = `manifest.${argv.mode}`;
 
   return {
     "devServer": {
@@ -16,13 +17,12 @@ module.exports = (env, argv) => { // eslint-disable-line max-lines-per-function
       "hot": false,  // for jest snapshot reason
       "open": ["/index"],
       "onAfterSetupMiddleware": ReactSSRMiddleware({
-        "reqToProps": (req) => {
-          return {
-            "port": req.socket.localPort, // for relay.test.js
-            "host": req.socket.localAddress, // for relay.test.js
-            ...url.parse(req.url, true).query,
-          };
-        },
+        "reqToProps": (req) => ({
+          "port": req.socket.localPort, // for relay.test.js
+          "host": req.socket.localAddress, // for relay.test.js
+          "url": url.parse(req.url, true),
+        }),
+        version,
       }),
       "onBeforeSetupMiddleware": graphql,
     },
@@ -107,6 +107,9 @@ module.exports = (env, argv) => { // eslint-disable-line max-lines-per-function
             "extensions": [".cjs", ".jsx", ".js", ".mjs"],
           },
         },
+        {
+          version,
+        }
       ),
       new CopyPlugin({
         "patterns": [{"from": path.resolve(__dirname, "..", "favicon.ico")}],

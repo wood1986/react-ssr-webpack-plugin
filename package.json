@@ -9,15 +9,18 @@
   "homepage": "https://github.com/wood1986/react-ssr-webpack-plugin",
   "bugs": "https://github.com/wood1986/react-ssr-webpack-plugin/issues",
   "license": "MIT",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "eslint": "eslint -c ./.eslintrc.js --ext .js --ext .jsx --ext .mjs --ext .cjs .",
     "app:1.0": "webpack --config=./examples/app/1.0/webpack.config.js --mode=production",
     "app:2.0": "webpack --config=./examples/app/2.0/webpack.config.js --mode=production",
+    "app:3.0": "webpack --config=./examples/app/3.0/webpack.config.js --mode=production",
     "app:1.0:start": "webpack serve --config=./examples/app/1.0/webpack.config.js --mode=development",
     "app:2.0:start": "webpack serve --config=./examples/app/2.0/webpack.config.js --mode=development",
-    "shell": "webpack --config=./examples/shell/webpack.config.js --mode=production",
-    "shell:start": "yarn app:1.0 && yarn app:2.0 && cp ./examples/app/dist/2.0.json ./examples/app/dist/default.json && yarn shell && node --inspect ./examples/shell/dist/index.js ./examples/app/dist",
+    "app:3.0:start": "webpack serve --config=./examples/app/3.0/webpack.config.js --mode=development",
+    "shell": "webpack --config=./examples/shell/webpack.config.js --mode=development",
+    "shell:all": "yarn app:1.0 && yarn app:2.0 && yarn app:3.0 && cp ./examples/app/dist/2.0.production.js ./examples/app/dist/default.js",
+    "shell:start": "node --inspect ./examples/shell/dist/index.js ./examples/app/dist",
     "relay-compiler": "relay-compiler --src ./examples/relay --schema ./examples/relay/graphql/schema.graphql",
     "relay": "webpack --config=./examples/relay/webpack.config.js --mode=production",
     "relay:start": "webpack serve --config=./examples/relay/webpack.config.js --mode=development",
@@ -66,14 +69,14 @@
     "pinst": "^2.1.6",
     "polka": "^0.5.2",
     "puppeteer": "^12.0.1",
-    "react": "18.0.0-alpha-6ecad79cc-20211006",
-    "react-dom": "18.0.0-alpha-6ecad79cc-20211006",
-    "react-is": "18.0.0-alpha-6ecad79cc-20211006",
+    "react": "18.0.0-beta-a65ceef37-20211130",
+    "react-dom": "18.0.0-beta-a65ceef37-20211130",
+    "react-is": "18.0.0-beta-a65ceef37-20211130",
     "react-relay": "^12.0.0",
     "react-relay-network-modern": "^6.2.1",
+    "react-router-dom": "^6.0.2",
     "relay-compiler": "^12.0.0",
     "relay-runtime": "^12.0.0",
-    "scheduler": "^0.20.2",
     "selfsigned": "^1.10.11",
     "serve-index": "^1.9.1",
     "serve-static": "^1.14.1",
@@ -89,10 +92,12 @@
     "webpack-dev-server": "^4.0.0"
   },
   "dependencies": {
-    "fs-monkey": "^1.0.3"
+    "fs-monkey": "^1.0.3",
+    "is-plain-object": "^5.0.0",
+    "react-router": "^6.0.2"
   },
   "resolutions": {
-    "react-is": "18.0.0-alpha-6ecad79cc-20211006"
+    "react-is": "18.0.0-beta-a65ceef37-20211130"
   },
   "packageManager": "yarn@3.1.0"
 }

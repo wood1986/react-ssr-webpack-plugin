@@ -1,11 +1,11 @@
 const path = require("path");
-const {ReactSSRWebpackPlugin, ReactSSRMiddleware} = require("../../../index");
+const {ReactSSRWebpackPlugin, ReactSSRMiddleware} = require("../../../src");
 const configFn = require("../webpack.config");
 const url = require("url");
 
 module.exports = (env, argv) => {
   const config = configFn(env, argv);
-  const version = "1.0";
+  const version = `1.0.${argv.mode}`;
 
   config.entry = {
     "a.web": path.resolve(__dirname, "a", "index.web"),
@@ -14,10 +14,8 @@ module.exports = (env, argv) => {
   config.devServer = {
     ...config.devServer,
     "onAfterSetupMiddleware": new ReactSSRMiddleware({
-      "reqToProps": (req) => ({
-        ...url.parse(req.url, true),
-        "__VERSION__": version,
-      }),
+      "reqToProps": (req) => ({"url": url.parse(req.url, true)}),
+      version,
     }),
     "open": ["/a.node"],
   };
@@ -33,7 +31,15 @@ module.exports = (env, argv) => {
           "extensions": [".cjs", ".jsx", ".js", ".mjs"],
         },
       },
-      {version}
+      {
+        "routes": [
+          {
+            "pattern": "/a.node",
+            "entry": () => "a.node",
+          },
+        ],
+        version,
+      }
     ),
   ];
 

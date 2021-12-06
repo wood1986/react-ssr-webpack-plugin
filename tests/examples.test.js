@@ -3,25 +3,33 @@ const {launchWebpackDevServer, testPages} = require("./utils");
 const tests = [
   {
     "name": "examples/app/1.0",
-    "urls": [
+    "urls": (mode) => [
       "a.node",
-      "1.0.json",
+      `1.0.${mode}.js`,
     ],
   },
   {
     "name": "examples/app/2.0",
-    "urls": [
+    "urls": (mode) => [
       "a.node",
       "b.node",
-      "2.0.json",
+      `2.0.${mode}.js`,
+    ],
+  },
+  {
+    "name": "examples/app/3.0",
+    "urls": (mode) => [
+      "a.node",
+      "b.node",
+      `3.0.${mode}.js`,
     ],
   },
   {
     "name": "examples/relay",
-    "urls": [
+    "urls": (mode) => [
       "index",
       "index?ssr=false",
-      "manifest.json",
+      `manifest.${mode}.js`,
     ],
   },
 ].reduce(
@@ -47,6 +55,6 @@ afterAll(async () => {
 test.concurrent.each(tests)("$name should not have any page error for $mode version", async ({name, mode, urls, host, port}) => {
   const configFn = require(`../${name}/webpack.config`);
   const devServer = await launchWebpackDevServer({configFn, mode, host, port});
-  await expect(testPages({browser, port, host, urls}))["resolves"].toBeUndefined();
+  await expect(testPages({browser, port, host, "urls": urls(mode)}))["resolves"].toBeUndefined();
   await devServer.stop();
 });

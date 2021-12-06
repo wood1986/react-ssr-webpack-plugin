@@ -1,7 +1,5 @@
 /* eslint-disable max-lines-per-function, max-statements */
 const crypto = require("crypto");
-const fs = require("fs");
-const {patchFs, patchRequire} = require("fs-monkey");
 const path = require("path");
 const webpack = require("webpack");
 const ResolverFactory = require("webpack/lib/ResolverFactory");
@@ -47,34 +45,33 @@ function extractDigests(assets, algorithm) {
   }, {});
 }
 
-function unionFs(fss) {
-  const readFileSync = "readFileSync";
-  const realpathSync = "realpathSync";
-  const statSync = "statSync";
+function genManifest(version, entries, routes) {
+  entries = Object.entries(entries).map(([key, js]) => {
+    return `    "${key}": "${js}"`;
+  }).join(",\n");
+  entries = entries
+? `{
+${entries}
+  }`
+: "{}";
 
-  function setupFunc(key) {
-    return (...args) => {
-      const errors = [];
-      // eslint-disable-next-line id-length
-      for (let i = 0; i < fss.length; i++) {
-        try {
-          return fss[i][key].apply(fss[i], args);
-        } catch(err) {
-          errors.push(err);
-        }
-      }
+  routes = routes.map(({pattern, entry}) => {
+    return `{
+      "pattern": "${pattern}",
+      "entry": ${entry.toString()}
+    }`;
+  }).join(",\n");
+  routes = routes
+? `[
+    ${routes}
+  ]`
+: "[]";
 
-      if (errors.length == fss.length) {
-        throw new Error(`all fs.${key} throw an exception.`);
-      }
-    };
-  }
-
-  return {
-    [readFileSync]: setupFunc(readFileSync),
-    [realpathSync]: setupFunc(realpathSync),
-    [statSync]: setupFunc(statSync),
-  };
+  return `module.exports = {
+  "__VERSION__": "${version}",
+  "__ENTRIES__": ${entries},
+  "__ROUTES__": ${routes}
+};`;
 }
 
 class ReactSSRWebpackPlugin {
@@ -83,6 +80,12 @@ class ReactSSRWebpackPlugin {
     this.configs.version = this.configs.version || "manifest";
     this.configs.algorithm = this.configs.algorithm || "sha256";
     this.configs.noRequire = this.configs.noRequire == undefined ? true : this.configs.noRequire;
+    this.configs.routes = this.configs.routes || [
+      {
+        "pattern": "/:entry",
+        "entry": ({params}) => params.entry,
+      },
+    ];
     this.options = webpack.config.getNormalizedWebpackOptions({
       "entry": {...options.entry},
       "resolve": {...options.resolve},
@@ -141,24 +144,15 @@ class ReactSSRWebpackPlugin {
             "stage": webpack.Compilation.PROCESS_ASSETS_STAGE_REPORT,
           },
           (_assets, callback) => {
-            if (childCompilation.errors.length > 0) {
-              callback(childCompilation.errors);
-              return;
-            }
-
-            const string = JSON.stringify(
-              {
-                "__VERSION__": this.configs.version,
-                ...extractFiles(childCompilation)[0],
-              },
-              null,
-              // eslint-disable-next-line no-magic-numbers
-              2
-            );
-
             childCompilation.emitAsset(
-              `${this.configs.version}.json`,
-              new webpack.sources.RawSource(string)
+              `${this.configs.version}.js`,
+              new webpack.sources.RawSource(
+                genManifest(
+                  this.configs.version,
+                  extractFiles(childCompilation)[0],
+                  this.configs.routes
+                )
+              )
             );
 
             callback();
@@ -234,54 +228,7 @@ class ReactSSRWebpackPlugin {
   }
 }
 
-function ReactSSRMiddleware({reqToProps}) {
-  return ({app, compiler}) => {
-    let files = {};
-    let outputPath = "";
-
-    const ufs = unionFs([{...compiler.outputFileSystem}, {...fs}]);
-    patchFs(ufs);       // this is for pnp
-    patchRequire(ufs);  // this is for classic require
-
-    app.get("/:entry", (req, res, next) => {
-      const entry = `${req.params.entry}.js`;
-
-      if (!files[entry]) {
-        next();
-        return;
-      }
-
-      require(`${outputPath}/${files[entry]}`)
-        .default(reqToProps(req))
-        .then((html) => {
-          res.send(html);
-        })
-        .then(next)
-        .catch(next);
-    });
-
-    compiler.hooks.compilation.tap(PLUGIN_NAME, (compilation) => {
-      if (compilation.name === PLUGIN_NAME) {
-        ({outputPath} = compilation.compiler);
-        compilation.hooks.afterSeal.tapAsync(PLUGIN_NAME, (callback) => {
-          [files] = extractFiles(compilation);
-          callback();
-        });
-      }
-    });
-
-    compiler.hooks.invalid.tap(PLUGIN_NAME, () => {
-      Object
-        .keys(require.cache)
-        .filter(id => id.startsWith(outputPath))
-        .forEach(id => {
-          delete require.cache[id];
-        });
-    });
-  };
-}
-
 module.exports = {
-  ReactSSRMiddleware,
+  PLUGIN_NAME,
   ReactSSRWebpackPlugin,
 };

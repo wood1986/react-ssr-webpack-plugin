@@ -28,5 +28,8 @@ export default async (props = {}) => {
     </body>
   </html>);
 
-  return html;
+  return {
+    html,
+    "statusCode": 200,
+  };
 };

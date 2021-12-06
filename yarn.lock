@@ -998,7 +998,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.16.3":
+"@babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.7.6":
   version: 7.16.3
   resolution: "@babel/runtime@npm:7.16.3"
   dependencies:
@@ -5370,6 +5370,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"history@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "history@npm:5.1.0"
+  dependencies:
+    "@babel/runtime": ^7.7.6
+  checksum: c978710a188ee5ad5d2acf55721c77e27469578c891a66311e71e8920d1390d14476e39a6db07e0ab0f5f8d594f1f62eb55a1059c7549cde7795a36367df5869
+  languageName: node
+  linkType: hard
+
 "hoist-non-react-statics@npm:^3.0.0":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
@@ -5945,6 +5954,13 @@ __metadata:
   dependencies:
     isobject: ^3.0.1
   checksum: 2a401140cfd86cabe25214956ae2cfee6fbd8186809555cd0e84574f88de7b17abacb2e477a6a658fa54c6083ecbda1e6ae404c7720244cd198903848fca70ca
+  languageName: node
+  linkType: hard
+
+"is-plain-object@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "is-plain-object@npm:5.0.0"
+  checksum: e32d27061eef62c0847d303125440a38660517e586f2f3db7c9d179ae5b6674ab0f469d519b2e25c147a1a3bc87156d0d5f4d8821e0ce4a9ee7fe1fcf11ce45c
   languageName: node
   linkType: hard
 
@@ -8312,23 +8328,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:18.0.0-alpha-6ecad79cc-20211006":
-  version: 18.0.0-alpha-6ecad79cc-20211006
-  resolution: "react-dom@npm:18.0.0-alpha-6ecad79cc-20211006"
+"react-dom@npm:18.0.0-beta-a65ceef37-20211130":
+  version: 18.0.0-beta-a65ceef37-20211130
+  resolution: "react-dom@npm:18.0.0-beta-a65ceef37-20211130"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-    scheduler: 0.21.0-alpha-6ecad79cc-20211006
+    scheduler: 0.21.0-beta-a65ceef37-20211130
   peerDependencies:
-    react: 18.0.0-alpha-6ecad79cc-20211006
-  checksum: 3ffc29e732f6a0b5a5e5ebad1ad9977392c4b1ed508ca23a208d045573a0386373da86df43f9d5efa2538ee2b13eb8eab0c242954c564f26f33601f8f90c1f2f
+    react: 18.0.0-beta-a65ceef37-20211130
+  checksum: 70e7f9b86c43ad16200b065d6c2e84ac372feb36bfe191e049e6fbd6d3b4180add6110831187cf82cb2baad720e1b15711e4ad832d7267c28869e9715fda11e6
   languageName: node
   linkType: hard
 
-"react-is@npm:18.0.0-alpha-6ecad79cc-20211006":
-  version: 18.0.0-alpha-6ecad79cc-20211006
-  resolution: "react-is@npm:18.0.0-alpha-6ecad79cc-20211006"
-  checksum: 4c38333781ccdc82d42221bfdcddc0d854d77765784ad31cec4718624a981adedac9d606d4fc07e689873f2036059f2f44d23906bc909da8d46688df77be5db5
+"react-is@npm:18.0.0-beta-a65ceef37-20211130":
+  version: 18.0.0-beta-a65ceef37-20211130
+  resolution: "react-is@npm:18.0.0-beta-a65ceef37-20211130"
+  checksum: 2e10d80af602bf33258ecfc4d3df0310aba4df33f033937acc6099698f508e5388c71740d8baf541ae923d416109332146421cec5ea9d4948bb99f638daa4bf2
   languageName: node
   linkType: hard
 
@@ -8356,6 +8372,30 @@ __metadata:
   peerDependencies:
     react: ^16.9.0 || ^17
   checksum: 3fde82d4b11deceba92bd9eb7649377ae4dd1fa736a4ddf97a7ba887851c4ffbecdf8b40a2a18d7af1c8c9bc73a6404aebd90482c345466fe763770cc211bf27
+  languageName: node
+  linkType: hard
+
+"react-router-dom@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "react-router-dom@npm:6.0.2"
+  dependencies:
+    history: ^5.1.0
+    react-router: 6.0.2
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: d3680939a4fac286f8df028c1fabe5626567ba065b2029b1cc4ad64fe9444aeba186d0e5e765563fc36ea868e7d17e02fb098f2ebc0b1c70212a8470a4b58ad6
+  languageName: node
+  linkType: hard
+
+"react-router@npm:6.0.2, react-router@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "react-router@npm:6.0.2"
+  dependencies:
+    history: ^5.1.0
+  peerDependencies:
+    react: ">=16.8"
+  checksum: 9d4f3a8002a90f38be022c6740e11e9bb481e60ad04c5a0ce2d6dbe685059c09b3037c45414d6e7e40eb97308842380413cfb93c5cdcb992e7ee0c50b4f7fcaa
   languageName: node
   linkType: hard
 
@@ -8387,20 +8427,22 @@ __metadata:
     fs-monkey: ^1.0.3
     graphql: ^15.7.2
     husky: ^7.0.4
+    is-plain-object: ^5.0.0
     jest: ^27.4.0
     mini-css-extract-plugin: ^2.4.5
     morgan: ^1.10.0
     pinst: ^2.1.6
     polka: ^0.5.2
     puppeteer: ^12.0.1
-    react: 18.0.0-alpha-6ecad79cc-20211006
-    react-dom: 18.0.0-alpha-6ecad79cc-20211006
-    react-is: 18.0.0-alpha-6ecad79cc-20211006
+    react: 18.0.0-beta-a65ceef37-20211130
+    react-dom: 18.0.0-beta-a65ceef37-20211130
+    react-is: 18.0.0-beta-a65ceef37-20211130
     react-relay: ^12.0.0
     react-relay-network-modern: ^6.2.1
+    react-router: ^6.0.2
+    react-router-dom: ^6.0.2
     relay-compiler: ^12.0.0
     relay-runtime: ^12.0.0
-    scheduler: ^0.20.2
     selfsigned: ^1.10.11
     serve-index: ^1.9.1
     serve-static: ^1.14.1
@@ -8416,13 +8458,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"react@npm:18.0.0-alpha-6ecad79cc-20211006":
-  version: 18.0.0-alpha-6ecad79cc-20211006
-  resolution: "react@npm:18.0.0-alpha-6ecad79cc-20211006"
+"react@npm:18.0.0-beta-a65ceef37-20211130":
+  version: 18.0.0-beta-a65ceef37-20211130
+  resolution: "react@npm:18.0.0-beta-a65ceef37-20211130"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-  checksum: 93aaf4776abb8c03518d1a5afd668bbcbda4c399909a8b520b0e2de0a3d3a518414322a851012f7eb17ff8a30f4408e2a54556b054dc5a2fa6a232ce9c9fb70b
+  checksum: f52183ddc1b71fb0d65f8f8775a93af55202ba11b3e89e2d24028aed7bb6cec25972cb0668da7644319ea09ffa9edb48ea66fa6f2fb4381797a7c9cd15e305a9
   languageName: node
   linkType: hard
 
@@ -8766,23 +8808,13 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"scheduler@npm:0.21.0-alpha-6ecad79cc-20211006":
-  version: 0.21.0-alpha-6ecad79cc-20211006
-  resolution: "scheduler@npm:0.21.0-alpha-6ecad79cc-20211006"
+"scheduler@npm:0.21.0-beta-a65ceef37-20211130":
+  version: 0.21.0-beta-a65ceef37-20211130
+  resolution: "scheduler@npm:0.21.0-beta-a65ceef37-20211130"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-  checksum: 582315599f0340b50ed3f2f7a5c1bd762f608d3af4642606823b4a530be2d5aab3ed225336abdb9bf232afbbb2ddeeb06027f3268e20354c66d73bd66d7c4ea0
-  languageName: node
-  linkType: hard
-
-"scheduler@npm:^0.20.2":
-  version: 0.20.2
-  resolution: "scheduler@npm:0.20.2"
-  dependencies:
-    loose-envify: ^1.1.0
-    object-assign: ^4.1.1
-  checksum: c4b35cf967c8f0d3e65753252d0f260271f81a81e427241295c5a7b783abf4ea9e905f22f815ab66676f5313be0a25f47be582254db8f9241b259213e999b8fc
+  checksum: 317afcb2207bee57a4daf651250a7b78b57a86856512003b46876387749f17f80034e305e2497e8c03992972043f9ea577ac63baf7650f6683d8eae221f824da
   languageName: node
   linkType: hard
 

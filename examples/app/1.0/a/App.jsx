@@ -1,4 +1,4 @@
-import styled, {createGlobalStyle, css} from "styled-components";
+import styled, {createGlobalStyle} from "styled-components";
 import {StrictMode} from "react";
 import svg from "../../react.svg";
 
@@ -20,19 +20,18 @@ const DivWrapper = styled.div`
 `;
 
 const GlobalStyle = createGlobalStyle`
-  ${css`
   * {
     margin:0;
   }
   html, body, body>div {
     height:100%;
-  }`
-}`;
+  }
+`;
 
 function Code(props) {
   return <code>
     name: {NAME}<br />
-    query.version: {props.query.version}<br />
+    query.version: {props.url.query.version}<br />
     json.__VERSION__: {props.__VERSION__}<br />
   </code>;
 }
