@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 2.0.0 (2021-12-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* add react-route support with http status code and example (#6)
+
+### Features
+
+* add react-route support with http status code and example ([#6](https://github.com/wood1986/react-ssr-webpack-plugin/issues/6)) ([72baf1b](https://github.com/wood1986/react-ssr-webpack-plugin/commit/72baf1bf99a2eef9e2081e0a5bd38ce33dc327bb))
+
 ### [1.0.1](https://github.com/wood1986/react-ssr-webpack-plugin/compare/v1.0.0...v1.0.1) (2021-11-12)
 
 
