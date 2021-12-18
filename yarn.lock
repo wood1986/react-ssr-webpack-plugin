@@ -7888,6 +7888,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"path-to-regexp@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "path-to-regexp@npm:6.2.0"
+  checksum: a6aca74d2d6e2e7594d812f653cf85e9cb5054d3a8d80f099722a44ef6ad22639b02078e5ea83d11db16321c3e4359e3f1ab0274fa78dad0754a6e53f630b0fc
+  languageName: node
+  linkType: hard
+
 "path-type@npm:^3.0.0":
   version: 3.0.0
   resolution: "path-type@npm:3.0.0"
@@ -8072,6 +8079,15 @@ __metadata:
   version: 1.1.2
   resolution: "prelude-ls@npm:1.1.2"
   checksum: c4867c87488e4a0c233e158e4d0d5565b609b105d75e4c05dc760840475f06b731332eb93cc8c9cecb840aa8ec323ca3c9a56ad7820ad2e63f0261dadcb154e4
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.5.1":
+  version: 2.5.1
+  resolution: "prettier@npm:2.5.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 21b9408476ea1c544b0e45d51ceb94a84789ff92095abb710942d780c862d0daebdb29972d47f6b4d0f7ebbfb0ffbf56cc2cfa3e3e9d1cca54864af185b15b66
   languageName: node
   linkType: hard
 
@@ -8394,8 +8410,10 @@ __metadata:
     jest: ^27.4.4
     mini-css-extract-plugin: ^2.4.5
     morgan: ^1.10.0
+    path-to-regexp: ^6.2.0
     pinst: ^2.1.6
     polka: ^0.5.2
+    prettier: ^2.5.1
     puppeteer: ^13.0.0
     react: 18.0.0-rc.0
     react-dom: 18.0.0-rc.0
@@ -8406,8 +8424,6 @@ __metadata:
     react-router-dom: ^6.1.1
     relay-compiler: ^12.0.0
     relay-runtime: ^12.0.0
-    selfsigned: ^1.10.11
-    serve-index: ^1.9.1
     serve-static: ^1.14.1
     standard-version: ^9.3.2
     styled-components: ^5.3.3

@@ -35,7 +35,7 @@ export default async (props) => {
 
   ssr && (await fetchQuery(environment, rootQuery, variables).toPromise());
   const __html = ssr ? renderToString(sheet.collectStyles(<App environment={environment} variables={variables} />)) : "";
-  const html = "<!DOCTYPE html>" + renderToStaticMarkup(<html>
+  const body = "<!DOCTYPE html>" + renderToStaticMarkup(<html>
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -50,12 +50,12 @@ export default async (props) => {
     </head>
     <body>
       <div id="root" dangerouslySetInnerHTML={{"__html": __html}}></div>
-      <script integrity={__DIGESTS__["vendors.js"]} src={__webpack_public_path__ + __FILES__["vendors.js"]} crossOrigin="anonymous" />
+      <script integrity={__DIGESTS__["vendors.js"]} src={`${__webpack_public_path__}/${__FILES__["vendors.js"]}`} crossOrigin="anonymous" />
     </body>
   </html>);
 
   return {
-    html,
+    body,
     "statusCode": 200,
   };
 };

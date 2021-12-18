@@ -14,9 +14,6 @@ module.exports = (env, argv) => {
     "devServer": {
       "host": "127.0.0.1",
       "hot": false,  // for jest snapshot reason
-      "devMiddleware": {
-        "writeToDisk": true,
-      },
     },
     "devtool": false,
     "mode": argv.mode,

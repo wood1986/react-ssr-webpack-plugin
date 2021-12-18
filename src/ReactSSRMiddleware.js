@@ -1,7 +1,8 @@
 const fs = require("fs");
 const {patchFs, patchRequire} = require("fs-monkey");
-const {ReactSSRCommonMiddleware} = require("./ReactSSRCommonMiddleware");
+const {ReactSSREntry, ReactSSRResponse} = require("../utils");
 const {PLUGIN_NAME} = require("./ReactSSRWebpackPlugin");
+const url = require("url");
 
 function unionFs(fss) {
   const readFileSync = "readFileSync";
@@ -33,20 +34,30 @@ function unionFs(fss) {
   };
 }
 
-function ReactSSRMiddleware({reqToProps, version = "manifest"}) {
+function ReactSSRMiddleware({
+  reqToProps = (req) => ({"url": url.parse(req.url, true)}),
+  version = "manifest",
+  resultToRes = ReactSSRResponse,
+}) {
   return ({app, compiler}) => {
     const ufs = unionFs([{...compiler.outputFileSystem}, {...fs}]);
     patchFs(ufs);       // this is for pnp
     patchRequire(ufs);  // this is for classic require
 
     app.get(
-      "/*",
-      ReactSSRCommonMiddleware({
-        "requireFn": require,
-        "workdir": compiler.outputPath,
-        reqToProps,
-        version,
-      })
+      "*",
+      async (req, res) => {
+        const result = await ReactSSREntry({
+          "props": reqToProps(req),
+          require,
+          "workdir": compiler.outputPath,
+          "url": url.parse(req.url, true),
+          version,
+        });
+
+        resultToRes(res, result);
+        return;
+      }
     );
 
     compiler.hooks.invalid.tap(PLUGIN_NAME, () => {

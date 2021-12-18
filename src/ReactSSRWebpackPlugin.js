@@ -4,6 +4,7 @@ const path = require("path");
 const webpack = require("webpack");
 const ResolverFactory = require("webpack/lib/ResolverFactory");
 const PLUGIN_NAME = "ReactSSRWebpackPlugin";
+const prettier = require("prettier");
 
 function extractFiles(compilation) {
   const warnings = [];
@@ -46,32 +47,18 @@ function extractDigests(assets, algorithm) {
 }
 
 function genManifest(version, entries, routes) {
-  entries = Object.entries(entries).map(([key, js]) => {
-    return `    "${key}": "${js}"`;
-  }).join(",\n");
-  entries = entries
-? `{
-${entries}
-  }`
-: "{}";
-
   routes = routes.map(({pattern, entry}) => {
     return `{
       "pattern": "${pattern}",
       "entry": ${entry.toString()}
     }`;
-  }).join(",\n");
-  routes = routes
-? `[
-    ${routes}
-  ]`
-: "[]";
+  });
 
   return `module.exports = {
-  "__VERSION__": "${version}",
-  "__ENTRIES__": ${entries},
-  "__ROUTES__": ${routes}
-};`;
+    "__VERSION__": "${version}",
+    "__ENTRIES__": ${JSON.stringify(entries)},
+    "__ROUTES__": [${routes}]
+  };`;
 }
 
 class ReactSSRWebpackPlugin {
@@ -147,10 +134,16 @@ class ReactSSRWebpackPlugin {
             childCompilation.emitAsset(
               `${this.configs.version}.js`,
               new webpack.sources.RawSource(
-                genManifest(
-                  this.configs.version,
-                  extractFiles(childCompilation)[0],
-                  this.configs.routes
+                prettier.format(
+                  genManifest(
+                    this.configs.version,
+                    extractFiles(childCompilation)[0],
+                    this.configs.routes
+                  ),
+                  {
+                    "semi": false,
+                    "parser": "babel",
+                  }
                 )
               )
             );

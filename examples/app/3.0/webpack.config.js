@@ -34,7 +34,7 @@ module.exports = (env, argv) => {
       {
         "routes": [
           {
-            "pattern": "*",
+            "pattern": "/(.*)",
             "entry": () => "index.node",
           },
         ],

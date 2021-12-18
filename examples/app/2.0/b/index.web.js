@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 //   navigator.serviceWorker.register(new URL("./sw.js", import.meta.url), {"scope": "/b.node"});
 // }
 
-ReactDOM.createRoot(
+ReactDOM.hydrateRoot(
   document.getElementById("root"),
-  {"hydrate": true}
-).render(<App {...globalThis.props} />);
+  <App {...globalThis.props} />
+);
