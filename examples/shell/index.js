@@ -3,7 +3,7 @@ const path = require("path");
 const polka = require("polka");
 const serveStatic = require("serve-static");
 const url = require("url");
-const {ReactSSRCommonMiddleware} = require("../../src/ReactSSRCommonMiddleware.js");
+const {ReactSSREntry, ReactSSRResponse} = require("../../utils");
 
 // eslint-disable-next-line no-magic-numbers
 const workdir = path.resolve(process.cwd(), process.argv.slice(2)[0] || ".");
@@ -19,12 +19,19 @@ console.log(`The shell on the url "http://localhost:8080" is running for the dir
     // eslint-disable-next-line max-statements
     .get(
       "*",
-      ReactSSRCommonMiddleware({
-        "requireFn": __non_webpack_require__,
-        "reqToProps": (req) => ({"url": url.parse(req.url, true)}),
-        workdir,
-        "version": "default",
-      })
+      async (req, res) => {
+        const reqUrl = url.parse(req.url, true);
+
+        const result = await ReactSSREntry({
+          "require": __non_webpack_require__,
+          workdir,
+          "props": {"url": reqUrl},
+          "url": reqUrl,
+          "version": reqUrl.query.version || "default",
+        });
+        ReactSSRResponse(res, result);
+        return;
+      }
     )
     .listen(...args);
   });

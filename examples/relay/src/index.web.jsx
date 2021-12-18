@@ -19,7 +19,15 @@ const environment = createEnvironment({
   network,
   "records": globalThis.__RELAY_STORE__,
 });
-ReactDOM.createRoot(
-  document.getElementById("root"),
-  {"hydrate": globalThis.__PROPS__.hydrate}
-).render(<App environment={environment} variables={globalThis.__PROPS__.variables} />);
+
+if (globalThis.__PROPS__.hydrate) {
+  ReactDOM.hydrateRoot(
+    document.getElementById("root"),
+    <App environment={environment} variables={globalThis.__PROPS__.variables} />
+  );
+} else {
+  ReactDOM.createRoot(
+    document.getElementById("root")
+  ).render(<App environment={environment} variables={globalThis.__PROPS__.variables} />);
+}
+

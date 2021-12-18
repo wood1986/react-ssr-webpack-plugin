@@ -23,7 +23,7 @@ export default async (props = {}) => {
   // there is no point to dynamicially change the head at runtime
   // when users share a link, crawler will hit that link again
 
-  const html = "<!DOCTYPE html>" + renderToStaticMarkup(<html>
+  const body = "<!DOCTYPE html>" + renderToStaticMarkup(<html>
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -35,12 +35,12 @@ export default async (props = {}) => {
     </head>
     <body>
       <div id="root" dangerouslySetInnerHTML={{"__html": div}} />
-      <script integrity={__DIGESTS__["vendors.js"]} src={__webpack_public_path__ + __FILES__["vendors.js"]} crossOrigin="anonymous" />
+      <script integrity={__DIGESTS__["vendors.js"]} src={`${__webpack_public_path__}/${__FILES__["vendors.js"]}`} crossOrigin="anonymous" />
     </body>
   </html>);
 
   return {
-    html,
+    body,
     "statusCode": statusCode.current,
   };
 };

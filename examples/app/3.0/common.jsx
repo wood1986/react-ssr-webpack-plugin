@@ -46,7 +46,7 @@ export function Code(props) {
 const Pre = styled.pre`
   font-family: monospace;
   font-size: initial;
-  margin: 13px 8px;
+  padding: 13px 8px;
   line-height: initial;
 `;
 
