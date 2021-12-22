@@ -13,7 +13,7 @@ export default async (props = {}) => {
   const div = renderToString(
     sheet.collectStyles(
       <StatusCodeContext.Provider value={statusCode}>
-        <StaticRouter location={props.url.href}>
+        <StaticRouter location={props.url.path}>
           <App {...props} />
         </StaticRouter>
       </StatusCodeContext.Provider>
@@ -35,7 +35,7 @@ export default async (props = {}) => {
     </head>
     <body>
       <div id="root" dangerouslySetInnerHTML={{"__html": div}} />
-      <script integrity={__DIGESTS__["vendors.js"]} src={`${__webpack_public_path__}/${__FILES__["vendors.js"]}`} crossOrigin="anonymous" />
+      <script integrity={__DIGESTS__["vendors.js"]} src={`${__webpack_public_path__}${__FILES__["vendors.js"]}`} crossOrigin="anonymous" />
     </body>
   </html>);
 

@@ -31,13 +31,17 @@ module.exports = (env, argv) => {
         },
         "resolve": {
           "extensions": [".cjs", ".jsx", ".js", ".mjs"],
+          "fallback": {
+            "stream": require.resolve("stream-browserify"),
+            "util": require.resolve("util"),
+          },
         },
       },
       {
         "routes": [
           {
             "pattern": "/:entry",
-            "entry": ({params}) => ["a.node", "b.node"].includes(params.entry) ? params.entry : null,
+            "entry": ({params}) => params.entry,
           },
         ],
         version,

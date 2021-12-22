@@ -25,7 +25,7 @@ export default async (props = {}) => {
     </head>
     <body>
       <div id="root" dangerouslySetInnerHTML={{"__html": div}} />
-      <script integrity={__DIGESTS__["vendors.js"]} src={`${__webpack_public_path__}/${__FILES__["vendors.js"]}`} crossOrigin="anonymous" />
+      <script integrity={__DIGESTS__["vendors.js"]} src={`${__webpack_public_path__}${__FILES__["vendors.js"]}`} crossOrigin="anonymous" />
     </body>
   </html>);
 
