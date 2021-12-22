@@ -1,4 +1,3 @@
-
 /* eslint-disable max-statements */
 const {match} = require("path-to-regexp");
 const {isPlainObject} = require("is-plain-object");
@@ -36,19 +35,6 @@ async function ReactSSREntry({require, workdir, props, url, version}) {
   }
 }
 
-function ReactSSRResponse(res, result) {
-  const {body, statusCode} = result;
-  res.writeHead(
-    statusCode,
-    {
-      "Content-Type": body.startsWith("<!DOCTYPE html>") ? "text/html" : "text/plain",
-    }
-  );
-  res.end(body);
-  return;
-}
-
 module.exports = {
   ReactSSREntry,
-  ReactSSRResponse,
 };

@@ -1,6 +1,7 @@
 const fs = require("fs");
 const {patchFs, patchRequire} = require("fs-monkey");
-const {ReactSSREntry, ReactSSRResponse} = require("../utils");
+const {ReactSSRResponse} = require("./ReactSSRResponse");
+const {ReactSSREntry} = require("./ReactSSREntry");
 const {PLUGIN_NAME} = require("./ReactSSRWebpackPlugin");
 const url = require("url");
 
