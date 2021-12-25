@@ -66,18 +66,24 @@ class ReactSSRWebpackPlugin {
     this.configs = configs;
     this.configs.version = this.configs.version || "manifest";
     this.configs.algorithm = this.configs.algorithm || "sha256";
-    this.configs.noRequire = this.configs.noRequire == undefined ? true : this.configs.noRequire;
     this.configs.routes = this.configs.routes || [
       {
         "pattern": "/:entry",
         "entry": ({params}) => params.entry,
       },
     ];
+
     this.options = webpack.config.getNormalizedWebpackOptions({
       "entry": {...options.entry},
       "resolve": {...options.resolve},
       "target": "node",
+      "output": {
+        "library": {
+          "type": "commonjs2",
+        },
+      },
     });
+
     webpack.config.applyWebpackOptionsDefaults(this.options);
   }
 
@@ -89,16 +95,6 @@ class ReactSSRWebpackPlugin {
 
     compiler.hooks.thisCompilation.tap(PLUGIN_NAME, (compilation) => {
       let childCompiler = compilation.createChildCompiler(PLUGIN_NAME);
-      new webpack.node.NodeTemplatePlugin().apply(childCompiler);
-      new webpack.node.NodeTargetPlugin().apply(childCompiler);
-      new webpack.library.EnableLibraryPlugin("commonjs2").apply(childCompiler);
-      new webpack.LoaderTargetPlugin("node").apply(childCompiler);
-      if (this.configs.noRequire) {
-        new webpack.optimize.LimitChunkCountPlugin({"maxChunks": 1}).apply(childCompiler);
-      } else {
-        new webpack.optimize.SplitChunksPlugin(compilation.options.optimization.splitChunks).apply(childCompiler);
-      }
-
       childCompiler.resolverFactory = new ResolverFactory();
       childCompiler.resolverFactory.hooks.resolveOptions.for("normal").tap(PLUGIN_NAME, (resolveOptions) => {
         resolveOptions = webpack.util.cleverMerge(this.options.resolve, resolveOptions);
@@ -117,11 +113,10 @@ class ReactSSRWebpackPlugin {
         return resolveOptions;
       });
 
-      childCompiler.options.output.library = {
-        ...childCompiler.options.output.library,
-        "name": "",
-        "type": "commonjs2",
-      };
+      new webpack.node.NodeTargetPlugin().apply(childCompiler);
+      new webpack.library.EnableLibraryPlugin(this.options.output.library.type).apply(childCompiler);
+      new webpack.optimize.LimitChunkCountPlugin({"maxChunks": 1}).apply(childCompiler);
+      childCompiler.options.output.library = this.options.output.library;
       webpack.EntryOptionPlugin.applyEntryOption(childCompiler, compilation.compiler.context, this.options.entry);
 
       childCompiler.hooks.thisCompilation.tap(PLUGIN_NAME, (childCompilation, {normalModuleFactory}) => {
@@ -201,6 +196,11 @@ class ReactSSRWebpackPlugin {
           digests = extractDigests(sources, this.configs.algorithm);
           compilation.warnings.push(...warnings);
           childCompiler.runAsChild((error, _entries, childCompilation) => {
+            if (error) {
+              callback(error);
+              return;
+            }
+
             const {parentCompilation} = childCompilation.compiler;
             parentCompilation.fileDependencies.addAll(childCompilation.fileDependencies);
             parentCompilation.contextDependencies.addAll(childCompilation.contextDependencies);
@@ -213,7 +213,7 @@ class ReactSSRWebpackPlugin {
             parentCompilation.fullHash = `${parentCompilation.fullHash}|${childCompilation.fullHash}`;
             parentCompilation.hash = `${parentCompilation.hash}|${childCompilation.hash}`;
 
-            callback(error);
+            callback(null);
           });
         }
       );
