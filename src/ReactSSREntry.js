@@ -1,7 +1,6 @@
 /* eslint-disable max-statements */
 const {match} = require("path-to-regexp");
 const {isPlainObject} = require("is-plain-object");
-const path = require("path");
 
 async function ReactSSREntry({require, workdir, props, url, version}) {
   try {
@@ -9,7 +8,11 @@ async function ReactSSREntry({require, workdir, props, url, version}) {
       return {"statusCode": 500, "body": "reqToProps does not return a plain object"};
     }
 
-    const manifest = `${path.resolve(workdir, version)}.js`;
+    if (version.startsWith(".") || version.includes("/")) {
+      return {"statusCode": 400, "body": "version cannot start with '.' and contain '/'"};
+    }
+
+    const manifest = `${workdir}/${version}.js`;
     delete require.cache[manifest];
 
     const {
@@ -28,7 +31,7 @@ async function ReactSSREntry({require, workdir, props, url, version}) {
       return {"statusCode": 404, "body": `Cannot find the entry '${entry}'`};
     }
 
-    return await require(`${path.resolve(workdir, __ENTRIES__[entry])}`)
+    return await require(`${workdir}/${__ENTRIES__[entry]}`)
       .default({...props, __VERSION__});
   } catch (err) {
     return {"statusCode": 500, "body": err.stack};
