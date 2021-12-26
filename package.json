@@ -66,6 +66,7 @@
     "jest": "^27.4.4",
     "mini-css-extract-plugin": "^2.4.5",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.6.6",
     "pinst": "^2.1.6",
     "polka": "^0.5.2",
     "puppeteer": "^13.0.0",

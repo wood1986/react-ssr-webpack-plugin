@@ -39,11 +39,13 @@ function ReactSSRMiddleware({
   reqToProps = (req) => ({"url": url.parse(req.url, true)}),
   version = "manifest",
   resultToRes = ReactSSRResponse,
+  patchGlobal = () => {},
 }) {
   return ({app, compiler}) => {
     const ufs = unionFs([{...compiler.outputFileSystem}, {...fs}]);
     patchFs(ufs);       // this is for pnp
     patchRequire(ufs);  // this is for classic require
+    patchGlobal(globalThis);
 
     app.get(
       "*",

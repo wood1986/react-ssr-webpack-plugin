@@ -7429,6 +7429,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-fetch@npm:^2.6.6":
+  version: 2.6.6
+  resolution: "node-fetch@npm:2.6.6"
+  dependencies:
+    whatwg-url: ^5.0.0
+  checksum: ee8290626bdb73629c59722b75dcf4b9b6a67c1ed7eb9102e368479c4a13b56a48c2bb3ad71571e378e98c8b2c64c820e11f9cd39e4b8557dd138ad571ef9a42
+  languageName: node
+  linkType: hard
+
 "node-forge@npm:^0.10.0":
   version: 0.10.0
   resolution: "node-forge@npm:0.10.0"
@@ -8446,6 +8455,7 @@ __metadata:
     jest: ^27.4.4
     mini-css-extract-plugin: ^2.4.5
     morgan: ^1.10.0
+    node-fetch: ^2.6.6
     path-to-regexp: ^6.2.0
     pinst: ^2.1.6
     polka: ^0.5.2
