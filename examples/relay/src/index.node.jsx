@@ -9,11 +9,8 @@ import {
 import {App} from "./Root";
 import {ServerStyleSheet} from "styled-components";
 import {createEnvironment} from "./environment";
-import fetch from "node-fetch";
 import {fetchQuery} from "relay-runtime";
 import rootQuery from "./__generated__/RootQuery.graphql.js";
-
-globalThis.fetch = fetch;
 
 export default async (props) => {
   const sheet = new ServerStyleSheet();

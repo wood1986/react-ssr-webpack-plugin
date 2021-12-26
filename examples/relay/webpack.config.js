@@ -23,6 +23,9 @@ module.exports = (env, argv) => { // eslint-disable-line max-lines-per-function
           "url": url.parse(req.url, true),
         }),
         version,
+        "patchGlobal": (global) => {
+          global.fetch = require("node-fetch");
+        },
       }),
       "onBeforeSetupMiddleware": graphql,
     },
