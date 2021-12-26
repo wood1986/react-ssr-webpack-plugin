@@ -45,6 +45,7 @@ module.exports = (env, argv) => {
           },
         ],
         version,
+        "node": false,
       }
     ),
   ];

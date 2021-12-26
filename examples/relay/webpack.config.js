@@ -112,6 +112,7 @@ module.exports = (env, argv) => { // eslint-disable-line max-lines-per-function
         },
         {
           version,
+          "node": true,
         }
       ),
       new CopyPlugin({
