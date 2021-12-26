@@ -72,10 +72,12 @@ class ReactSSRWebpackPlugin {
         "entry": ({params}) => params.entry,
       },
     ];
+    this.configs.node = this.configs.node == undefined ? true : this.configs.node;
 
     this.options = webpack.config.getNormalizedWebpackOptions({
       "entry": {...options.entry},
       "resolve": {...options.resolve},
+      "resolveLoader": {...options.resolveLoader},
       "target": "node",
       "output": {
         "library": {
@@ -113,7 +115,10 @@ class ReactSSRWebpackPlugin {
         return resolveOptions;
       });
 
-      new webpack.node.NodeTargetPlugin().apply(childCompiler);
+      if (this.configs.node) {
+        new webpack.node.NodeTargetPlugin().apply(childCompiler);
+      }
+
       new webpack.library.EnableLibraryPlugin(this.options.output.library.type).apply(childCompiler);
       new webpack.optimize.LimitChunkCountPlugin({"maxChunks": 1}).apply(childCompiler);
       childCompiler.options.output.library = this.options.output.library;
