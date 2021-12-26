@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 2.1.0 (2021-12-26)
+
+
+### Features
+
+* add a boolean config var for applying NodeTargetPlugin ([#14](https://github.com/wood1986/react-ssr-webpack-plugin/issues/14)) ([08fcfab](https://github.com/wood1986/react-ssr-webpack-plugin/commit/08fcfab55ba3ff3c38d6d884bca4685891a52612))
+
 ## 2.0.0 (2021-12-06)
 
 
