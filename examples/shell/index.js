@@ -3,7 +3,8 @@ const path = require("path");
 const polka = require("polka");
 const serveStatic = require("serve-static");
 const url = require("url");
-const {ReactSSREntry, ReactSSRResponse} = require("../../utils");
+const {ReactSSREntry} = require("../../src/ReactSSREntry");
+const {ReactSSRResponse} = require("../../src/ReactSSRResponse");
 
 // eslint-disable-next-line no-magic-numbers
 const workdir = path.resolve(process.cwd(), process.argv.slice(2)[0] || ".");
