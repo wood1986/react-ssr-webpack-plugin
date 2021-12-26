@@ -2578,6 +2578,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"available-typed-arrays@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "available-typed-arrays@npm:1.0.5"
+  checksum: 20eb47b3cefd7db027b9bbb993c658abd36d4edd3fe1060e83699a03ee275b0c9b216cc076ff3f2db29073225fb70e7613987af14269ac1fe2a19803ccc97f1a
+  languageName: node
+  linkType: hard
+
 "babel-jest@npm:^27.4.4":
   version: 27.4.4
   resolution: "babel-jest@npm:27.4.4"
@@ -4211,7 +4218,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es-abstract@npm:^1.18.0-next.2, es-abstract@npm:^1.19.0, es-abstract@npm:^1.19.1":
+"es-abstract@npm:^1.18.0-next.2, es-abstract@npm:^1.18.5, es-abstract@npm:^1.19.0, es-abstract@npm:^1.19.1":
   version: 1.19.1
   resolution: "es-abstract@npm:1.19.1"
   dependencies:
@@ -4905,6 +4912,13 @@ __metadata:
     debug:
       optional: true
   checksum: d4ce74cf5c6f363168b97e706b914eb9ffb6bf4d4c6d8f8330b93088d9b90e566611ddbcf0e42c8ed5fd17598dfeda1d19230d3e9d6d6c6b4d1c10ec3a0b99be
+  languageName: node
+  linkType: hard
+
+"foreach@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "foreach@npm:2.0.5"
+  checksum: dab4fbfef0b40b69ee5eab81bcb9626b8fa8b3469c8cfa26480f3e5e1ee08c40eae07048c9a967c65aeda26e774511ccc70b3f10a604c01753c6ef24361f0fc8
   languageName: node
   linkType: hard
 
@@ -5653,7 +5667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inherits@npm:2, inherits@npm:2.0.4, inherits@npm:^2.0.1, inherits@npm:^2.0.3, inherits@npm:^2.0.4, inherits@npm:~2.0.3":
+"inherits@npm:2, inherits@npm:2.0.4, inherits@npm:^2.0.1, inherits@npm:^2.0.3, inherits@npm:^2.0.4, inherits@npm:~2.0.3, inherits@npm:~2.0.4":
   version: 2.0.4
   resolution: "inherits@npm:2.0.4"
   checksum: 4a48a733847879d6cf6691860a6b1e3f0f4754176e4d71494c41f3475553768b10f84b5ce1d40fbd0e34e6bfbb864ee35858ad4dd2cf31e02fc4a154b724d7f1
@@ -5838,6 +5852,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-generator-function@npm:^1.0.7":
+  version: 1.0.10
+  resolution: "is-generator-function@npm:1.0.10"
+  dependencies:
+    has-tostringtag: ^1.0.0
+  checksum: d54644e7dbaccef15ceb1e5d91d680eb5068c9ee9f9eb0a9e04173eb5542c9b51b5ab52c5537f5703e48d5fddfd376817c1ca07a84a407b7115b769d4bdde72b
+  languageName: node
+  linkType: hard
+
 "is-glob@npm:^4.0.0, is-glob@npm:^4.0.1, is-glob@npm:^4.0.3, is-glob@npm:~4.0.1":
   version: 4.0.3
   resolution: "is-glob@npm:4.0.3"
@@ -5983,6 +6006,19 @@ __metadata:
   dependencies:
     text-extensions: ^1.0.0
   checksum: fb5d78752c22b3f73a7c9540768f765ffcfa38c9e421e2b9af869565307fa1ae5e3d3a2ba016a43549742856846566d327da406e94a5846ec838a288b1704fd2
+  languageName: node
+  linkType: hard
+
+"is-typed-array@npm:^1.1.3, is-typed-array@npm:^1.1.7":
+  version: 1.1.8
+  resolution: "is-typed-array@npm:1.1.8"
+  dependencies:
+    available-typed-arrays: ^1.0.5
+    call-bind: ^1.0.2
+    es-abstract: ^1.18.5
+    foreach: ^2.0.5
+    has-tostringtag: ^1.0.0
+  checksum: aa0f9f0716e19e2fb8aef69e69e4205479d25ace778e2339fc910948115cde4b0d9aff9d5d1e8b80f09a5664998278e05e54ad3dc9cb12cefcf86db71084ed00
   languageName: node
   linkType: hard
 
@@ -8426,8 +8462,10 @@ __metadata:
     relay-runtime: ^12.0.0
     serve-static: ^1.14.1
     standard-version: ^9.3.2
+    stream-browserify: ^3.0.0
     styled-components: ^5.3.3
     terser-webpack-plugin: ^5.2.5
+    util: ^0.12.4
     webpack: ^5.65.0
     webpack-cli: ^4.9.1
     webpack-dev-server: ^4.6.0
@@ -8491,7 +8529,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:3, readable-stream@npm:^3.0.0, readable-stream@npm:^3.0.2, readable-stream@npm:^3.0.6, readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0":
+"readable-stream@npm:3, readable-stream@npm:^3.0.0, readable-stream@npm:^3.0.2, readable-stream@npm:^3.0.6, readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0, readable-stream@npm:^3.5.0":
   version: 3.6.0
   resolution: "readable-stream@npm:3.6.0"
   dependencies:
@@ -8764,7 +8802,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"safe-buffer@npm:>=5.1.0, safe-buffer@npm:^5.0.1, safe-buffer@npm:^5.1.0, safe-buffer@npm:~5.2.0":
+"safe-buffer@npm:>=5.1.0, safe-buffer@npm:^5.0.1, safe-buffer@npm:^5.1.0, safe-buffer@npm:^5.1.2, safe-buffer@npm:~5.2.0":
   version: 5.2.1
   resolution: "safe-buffer@npm:5.2.1"
   checksum: b99c4b41fdd67a6aaf280fcd05e9ffb0813654894223afb78a31f14a19ad220bba8aba1cb14eddce1fcfb037155fe6de4e861784eb434f7d11ed58d1e70dd491
@@ -9249,6 +9287,16 @@ resolve@^2.0.0-next.3:
   version: 1.5.0
   resolution: "statuses@npm:1.5.0"
   checksum: c469b9519de16a4bb19600205cffb39ee471a5f17b82589757ca7bd40a8d92ebb6ed9f98b5a540c5d302ccbc78f15dc03cc0280dd6e00df1335568a5d5758a5c
+  languageName: node
+  linkType: hard
+
+"stream-browserify@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "stream-browserify@npm:3.0.0"
+  dependencies:
+    inherits: ~2.0.4
+    readable-stream: ^3.5.0
+  checksum: 4c47ef64d6f03815a9ca3874e2319805e8e8a85f3550776c47ce523b6f4c6cd57f40e46ec6a9ab8ad260fde61863c2718f250d3bedb3fe9052444eb9abfd9921
   languageName: node
   linkType: hard
 
@@ -9978,6 +10026,20 @@ typescript@^4.4.3:
   languageName: node
   linkType: hard
 
+"util@npm:^0.12.4":
+  version: 0.12.4
+  resolution: "util@npm:0.12.4"
+  dependencies:
+    inherits: ^2.0.3
+    is-arguments: ^1.0.4
+    is-generator-function: ^1.0.7
+    is-typed-array: ^1.1.3
+    safe-buffer: ^5.1.2
+    which-typed-array: ^1.1.2
+  checksum: 8eac7a6e6b341c0f1b3eb73bbe5dfcae31a7e9699c8fc3266789f3e95f7637946a7700dcf1904dbd3749a58a36760ebf7acf4bb5b717f7468532a8a79f44eff0
+  languageName: node
+  linkType: hard
+
 "utils-merge@npm:1.0.1":
   version: 1.0.1
   resolution: "utils-merge@npm:1.0.1"
@@ -10317,6 +10379,20 @@ typescript@^4.4.3:
   version: 2.0.0
   resolution: "which-module@npm:2.0.0"
   checksum: 809f7fd3dfcb2cdbe0180b60d68100c88785084f8f9492b0998c051d7a8efe56784492609d3f09ac161635b78ea29219eb1418a98c15ce87d085bce905705c9c
+  languageName: node
+  linkType: hard
+
+"which-typed-array@npm:^1.1.2":
+  version: 1.1.7
+  resolution: "which-typed-array@npm:1.1.7"
+  dependencies:
+    available-typed-arrays: ^1.0.5
+    call-bind: ^1.0.2
+    es-abstract: ^1.18.5
+    foreach: ^2.0.5
+    has-tostringtag: ^1.0.0
+    is-typed-array: ^1.1.7
+  checksum: 147837cf5866e36b6b2e427731709e02f79f1578477cbde68ed773a5307520a6cb6836c73c79c30690a473266ee59010b83b6d9b25d8d677a40ff77fb37a8a84
   languageName: node
   linkType: hard
 

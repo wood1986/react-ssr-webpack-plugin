@@ -29,6 +29,10 @@ module.exports = (env, argv) => {
         },
         "resolve": {
           "extensions": [".cjs", ".jsx", ".js", ".mjs"],
+          "fallback": {
+            "stream": require.resolve("stream-browserify"),
+            "util": require.resolve("util"),
+          },
         },
       },
       {
