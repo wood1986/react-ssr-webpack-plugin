@@ -31,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
 function Code(props) {
   return <code>
     name: {NAME}<br />
-    query.version: {props.url.query.version}<br />
+    server.url.href: {props.url.href}<br />
     json.__VERSION__: {props.__VERSION__}<br />
   </code>;
 }
