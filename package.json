@@ -5,7 +5,7 @@
     "ssr",
     "webpack"
   ],
-  "version": "2.1.0",
+  "version": "2.2.0",
   "homepage": "https://github.com/wood1986/react-ssr-webpack-plugin",
   "bugs": "https://github.com/wood1986/react-ssr-webpack-plugin/issues",
   "license": "MIT",

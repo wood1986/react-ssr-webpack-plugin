@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/wood1986/react-ssr-webpack-plugin/compare/v2.1.0...v2.2.0) (2021-12-27)
+
+
+### Features
+
+* support setupMiddlewares ([#18](https://github.com/wood1986/react-ssr-webpack-plugin/issues/18)) ([8ce9dc5](https://github.com/wood1986/react-ssr-webpack-plugin/commit/8ce9dc58fa7aadc1582fee753cc5a19de1bb2e75))
+
+
+### Bug Fixes
+
+* fix ReactSSRMiddleware not to register the route ([#16](https://github.com/wood1986/react-ssr-webpack-plugin/issues/16)) ([bb2b95e](https://github.com/wood1986/react-ssr-webpack-plugin/commit/bb2b95ef186f2a574526a6da936c4967de22210f))
+* fix the depth in the release workflow for generating all commit logs and correct CHANGELOG.md ([#15](https://github.com/wood1986/react-ssr-webpack-plugin/issues/15)) ([1d4e491](https://github.com/wood1986/react-ssr-webpack-plugin/commit/1d4e491faad47aa1369b6a0b7fc661fed8f87e36))
+
 ## [2.1.0](https://github.com/wood1986/react-ssr-webpack-plugin/compare/v2.0.0...v2.1.0) (2021-12-26)
 
 
