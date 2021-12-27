@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 const path = require("path");
 const {ReactSSRWebpackPlugin, ReactSSRMiddleware} = require("../../src");
 const url = require("url");
@@ -7,7 +8,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const packageJson = require("../../package.json");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
-module.exports = (env, argv) => { // eslint-disable-line max-lines-per-function
+module.exports = (env, argv) => {
   const PROD = argv.mode === "production";
   const version = `manifest.${argv.mode}`;
 
@@ -16,17 +17,22 @@ module.exports = (env, argv) => { // eslint-disable-line max-lines-per-function
       "host": "127.0.0.1",
       "hot": false,  // for jest snapshot reason
       "open": ["/index"],
-      "onAfterSetupMiddleware": ReactSSRMiddleware({
-        "reqToProps": (req) => ({
-          "port": req.socket.localPort, // for relay.test.js
-          "host": req.socket.localAddress, // for relay.test.js
-          "url": url.parse(req.url, true),
-        }),
-        version,
-        "patchGlobal": (global) => {
-          global.fetch = require("node-fetch");
-        },
-      }),
+      "onAfterSetupMiddleware": (devServer) => {
+        devServer.app.get("*", ReactSSRMiddleware(
+          devServer.compiler,
+          {
+            "reqToProps": (req) => ({
+              "port": req.socket.localPort, // for relay.test.js
+              "host": req.socket.localAddress, // for relay.test.js
+              "url": url.parse(req.originalUrl, true),
+            }),
+            version,
+            "patchGlobal": (global) => {
+              global.fetch = require("node-fetch");
+            },
+          }
+        ));
+      },
       "onBeforeSetupMiddleware": graphql,
     },
     "devtool": false,

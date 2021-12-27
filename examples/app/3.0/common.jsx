@@ -37,7 +37,7 @@ export function Code(props) {
   const location = useLocation();
   return <code>
     name: {NAME}<br />
-    query.version: {props.url.query.version}<br />
+    server.url.href: {props.url.href}<br />
     json.__VERSION__: {props.__VERSION__}<br />
     <Link to={`/${props.to}${location.search}`}>{props.to}</Link>
   </code>;

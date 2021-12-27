@@ -35,42 +35,39 @@ function unionFs(fss) {
   };
 }
 
-function ReactSSRMiddleware({
-  reqToProps = (req) => ({"url": url.parse(req.url, true)}),
-  version = "manifest",
-  resultToRes = ReactSSRResponse,
-  patchGlobal = () => {},
-}) {
-  return ({app, compiler}) => {
-    const ufs = unionFs([{...compiler.outputFileSystem}, {...fs}]);
-    patchFs(ufs);       // this is for pnp
-    patchRequire(ufs);  // this is for classic require
-    patchGlobal(globalThis);
+function ReactSSRMiddleware(
+  compiler,
+  {
+    reqToProps = (req) => ({"url": url.parse(req.url, true)}),
+    version = "manifest",
+    resultToRes = ReactSSRResponse,
+    patchGlobal = () => {},
+  }
+) {
+  const ufs = unionFs([{...compiler.outputFileSystem}, {...fs}]);
+  patchFs(ufs);       // this is for pnp
+  patchRequire(ufs);  // this is for classic require
+  patchGlobal(globalThis);
 
-    app.get(
-      "*",
-      async (req, res) => {
-        const result = await ReactSSREntry({
-          "props": reqToProps(req),
-          require,
-          "workdir": compiler.outputPath,
-          "url": url.parse(req.url, true),
-          version,
-        });
+  compiler.hooks.invalid.tap(PLUGIN_NAME, () => {
+    Object
+      .keys(require.cache)
+      .filter(id => id.startsWith(compiler.outputPath))
+      .forEach(id => {
+        delete require.cache[id];
+      });
+  });
 
-        resultToRes(res, result);
-        return;
-      }
-    );
-
-    compiler.hooks.invalid.tap(PLUGIN_NAME, () => {
-      Object
-        .keys(require.cache)
-        .filter(id => id.startsWith(compiler.outputPath))
-        .forEach(id => {
-          delete require.cache[id];
-        });
+  return async (req, res) => {
+    const result = await ReactSSREntry({
+      "props": reqToProps(req),
+      require,
+      "workdir": compiler.outputPath,
+      "url": url.parse(req.originalUrl, true),
+      version,
     });
+
+    resultToRes(res, result);
   };
 }
 

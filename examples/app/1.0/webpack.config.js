@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 const path = require("path");
 const {ReactSSRWebpackPlugin, ReactSSRMiddleware} = require("../../../src");
 const configFn = require("../webpack.config");
@@ -13,10 +14,15 @@ module.exports = (env, argv) => {
 
   config.devServer = {
     ...config.devServer,
-    "onAfterSetupMiddleware": new ReactSSRMiddleware({
-      "reqToProps": (req) => ({"url": url.parse(req.url, true)}),
-      version,
-    }),
+    "onAfterSetupMiddleware": (devServer) => {
+      devServer.app.get("*", ReactSSRMiddleware(
+        devServer.compiler,
+        {
+          "reqToProps": (req) => ({"url": url.parse(req.originalUrl, true)}),
+          version,
+        }
+      ));
+    },
     "open": ["/a.node"],
   };
 
