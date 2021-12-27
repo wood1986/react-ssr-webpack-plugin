@@ -17,23 +17,31 @@ module.exports = (env, argv) => {
       "host": "127.0.0.1",
       "hot": false,  // for jest snapshot reason
       "open": ["/index"],
-      "onAfterSetupMiddleware": (devServer) => {
-        devServer.app.get("*", ReactSSRMiddleware(
-          devServer.compiler,
+      "setupMiddlewares": (middlewares, devServer) => {
+        graphql(devServer);
+
+        return [
+          ...middlewares,
           {
-            "reqToProps": (req) => ({
-              "port": req.socket.localPort, // for relay.test.js
-              "host": req.socket.localAddress, // for relay.test.js
-              "url": url.parse(req.originalUrl, true),
-            }),
-            version,
-            "patchGlobal": (global) => {
-              global.fetch = require("node-fetch");
-            },
-          }
-        ));
+            "name": "ReactSSRWebpackPlugin",
+            "path": "*",
+            "middleware": ReactSSRMiddleware(
+              devServer.compiler,
+              {
+                "reqToProps": (req) => ({
+                  "port": req.socket.localPort, // for relay.test.js
+                  "host": req.socket.localAddress, // for relay.test.js
+                  "url": url.parse(req.originalUrl, true),
+                }),
+                version,
+                "patchGlobal": (global) => {
+                  global.fetch = require("node-fetch");
+                },
+              }
+            ),
+          },
+        ];
       },
-      "onBeforeSetupMiddleware": graphql,
     },
     "devtool": false,
     "entry": {

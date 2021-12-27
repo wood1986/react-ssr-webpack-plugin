@@ -15,15 +15,20 @@ module.exports = (env, argv) => {
 
   config.devServer = {
     ...config.devServer,
-    "onAfterSetupMiddleware": (devServer) => {
-      devServer.app.get("*", ReactSSRMiddleware(
-        devServer.compiler,
-        {
-          "reqToProps": (req) => ({"url": url.parse(req.originalUrl, true)}),
-          version,
-        }
-      ));
-    },
+    "setupMiddlewares": (middlewares, devServer) => ([
+      ...middlewares,
+      {
+        "name": "ReactSSRWebpackPlugin",
+        "path": "*",
+        "middleware": ReactSSRMiddleware(
+          devServer.compiler,
+          {
+            "reqToProps": (req) => ({"url": url.parse(req.originalUrl, true)}),
+            version,
+          }
+        ),
+      },
+    ]),
     "open": ["/a.node", "/b.node"],
   };
 
