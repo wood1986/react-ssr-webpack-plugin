@@ -4,7 +4,6 @@ const polka = require("polka");
 const serveStatic = require("serve-static");
 const url = require("url");
 const {ReactSSREntry} = require("../../src/ReactSSREntry");
-const {ReactSSRResponse} = require("../../src/ReactSSRResponse");
 
 // eslint-disable-next-line no-magic-numbers
 const workdir = path.resolve(process.cwd(), process.argv.slice(2)[0] || ".");
@@ -23,15 +22,21 @@ console.log(`The shell on the url "http://localhost:8080" is running for the dir
       async (req, res) => {
         const reqUrl = url.parse(req.url, true);
 
-        const result = await ReactSSREntry({
+        const {statusCode, body} = await ReactSSREntry({
           "require": __non_webpack_require__,
           workdir,
           "props": {"url": reqUrl},
           "url": reqUrl,
           "version": reqUrl.query.version || "default",
         });
-        ReactSSRResponse(res, result);
-        return;
+
+        res.writeHead(
+          statusCode,
+          {
+            "Content-Type": body.startsWith("<!DOCTYPE html>") ? "text/html" : "text/plain",
+          }
+        );
+        res.end(body);
       }
     )
     .listen(...args);

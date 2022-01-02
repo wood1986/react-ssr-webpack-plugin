@@ -1,6 +1,5 @@
 const fs = require("fs");
 const {patchFs, patchRequire} = require("fs-monkey");
-const {ReactSSRResponse} = require("./ReactSSRResponse");
 const {ReactSSREntry} = require("./ReactSSREntry");
 const {PLUGIN_NAME} = require("./ReactSSRWebpackPlugin");
 const url = require("url");
@@ -38,9 +37,11 @@ function unionFs(fss) {
 function ReactSSRMiddleware(
   compiler,
   {
-    reqToProps = (req) => ({"url": url.parse(req.url, true)}),
+    reqToProps = () => ({}),
     version = "manifest",
-    resultToRes = ReactSSRResponse,
+    resultToRes = (res, {body, statusCode}) => {
+      res.status(statusCode).send(body);
+    },
     patchGlobal = () => {},
   }
 ) {
