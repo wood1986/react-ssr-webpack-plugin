@@ -33,6 +33,6 @@ export function Code(props) {
     name: {NAME}<br />
     server.url.href: {props.url.href}<br />
     json.__VERSION__: {props.__VERSION__}<br />
-    <a href={props.href}>{props.href}</a>
+    <a href={`${props.href}${props.url.search}`}>{props.href}</a>
   </code>;
 }

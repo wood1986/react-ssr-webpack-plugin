@@ -62,22 +62,22 @@ function genManifest(version, entries, routes) {
 }
 
 class ReactSSRWebpackPlugin {
-  constructor(options, configs = {}) {
-    this.configs = configs;
-    this.configs.version = this.configs.version || "manifest";
-    this.configs.algorithm = this.configs.algorithm || "sha256";
-    this.configs.routes = this.configs.routes || [
+  constructor(options, config = {}) {
+    this.config = config;
+    this.config.version = this.config.version || "manifest";
+    this.config.algorithm = this.config.algorithm || "sha256";
+    this.config.routes = this.config.routes || [
       {
         "pattern": "/:entry",
         "entry": ({params}) => params.entry,
       },
     ];
-    this.configs.node = this.configs.node == undefined ? true : this.configs.node;
+    this.config.node = this.config.node == undefined ? true : this.config.node;
 
     this.options = webpack.config.getNormalizedWebpackOptions({
-      "entry": {...options.entry},
-      "resolve": {...options.resolve},
-      "resolveLoader": {...options.resolveLoader},
+      "entry": options.entry,
+      "resolve": options.resolve,
+      "resolveLoader": options.resolveLoader,
       "target": "node",
       "output": {
         "library": {
@@ -115,7 +115,7 @@ class ReactSSRWebpackPlugin {
         return resolveOptions;
       });
 
-      if (this.configs.node) {
+      if (this.config.node) {
         new webpack.node.NodeTargetPlugin().apply(childCompiler);
       }
 
@@ -132,13 +132,13 @@ class ReactSSRWebpackPlugin {
           },
           (_assets, callback) => {
             childCompilation.emitAsset(
-              `${this.configs.version}.js`,
+              `${this.config.version}.js`,
               new webpack.sources.RawSource(
                 prettier.format(
                   genManifest(
-                    this.configs.version,
+                    this.config.version,
                     extractFiles(childCompilation)[0],
-                    this.configs.routes
+                    this.config.routes
                   ),
                   {
                     "semi": false,
@@ -198,7 +198,7 @@ class ReactSSRWebpackPlugin {
         (_assets, callback) => {
           [files, warnings] = extractFiles(compilation);
           sources = extractSources(compilation, files);
-          digests = extractDigests(sources, this.configs.algorithm);
+          digests = extractDigests(sources, this.config.algorithm);
           compilation.warnings.push(...warnings);
           childCompiler.runAsChild((error, _entries, childCompilation) => {
             if (error) {
