@@ -38,8 +38,8 @@ export function Code(props) {
   return <code>
     name: {NAME}<br />
     server.url.href: {props.url.href}<br />
-    json.__VERSION__: {props.__VERSION__}<br />
-    <Link to={`/${props.to}${location.search}`}>{props.to}</Link>
+    __VERSION__: <a href={`${props.__VERSION__}.js`}>{props.__VERSION__}</a><br />
+    <Link to={`/${props.to}${location.search || ""}`}>{props.to}</Link>
   </code>;
 }
 
