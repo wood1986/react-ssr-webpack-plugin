@@ -32,7 +32,7 @@ function Code(props) {
   return <code>
     name: {NAME}<br />
     server.url.href: {props.url.href}<br />
-    json.__VERSION__: {props.__VERSION__}<br />
+    json.__VERSION__: <a href={`${props.__VERSION__}.js`}>{props.__VERSION__}</a><br />
   </code>;
 }
 
