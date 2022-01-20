@@ -40,6 +40,10 @@ function ReactSSRMiddleware(
     reqToProps = () => ({}),
     version = "manifest",
     resultToRes = (res, {body, statusCode}) => {
+      // eslint-disable-next-line no-magic-numbers
+      if (statusCode != 200) {
+        res.type("text");
+      }
       res.status(statusCode).send(body);
     },
     patchGlobal = () => {},

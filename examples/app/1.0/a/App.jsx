@@ -1,5 +1,6 @@
-import styled, {createGlobalStyle} from "styled-components";
+import "./App.css";
 import {StrictMode} from "react";
+import styled from "styled-components";
 import svg from "../../react.svg";
 
 const DivWrapper = styled.div`
@@ -19,26 +20,16 @@ const DivWrapper = styled.div`
   }
 `;
 
-const GlobalStyle = createGlobalStyle`
-  * {
-    margin:0;
-  }
-  html, body, body>div {
-    height:100%;
-  }
-`;
-
 function Code(props) {
   return <code>
     name: {NAME}<br />
     server.url.href: {props.url.href}<br />
-    __VERSION__: <a href={`${props.__VERSION__}.js`}>{props.__VERSION__}</a><br />
+    __VERSION__: <a href={`${__webpack_public_path__}${props.__VERSION__}.js`}>{props.__VERSION__}</a><br />
   </code>;
 }
 
 export function App(props) {
   return <StrictMode>
-    <GlobalStyle />
     <DivWrapper>
       <img src={svg} />
       <Code {...props} />

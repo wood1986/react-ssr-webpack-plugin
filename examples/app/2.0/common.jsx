@@ -1,4 +1,5 @@
-import styled, {createGlobalStyle} from "styled-components";
+import styled from "styled-components";
+import styles from "./Code.css";
 
 export const DivWrapper = styled.div`
   display: flex;
@@ -19,20 +20,11 @@ export const DivWrapper = styled.div`
   }
 `;
 
-export const GlobalStyle = createGlobalStyle`
-  * {
-    margin:0;
-  }
-  html, body, body>div {
-    height:100%;
-  }
-`;
-
 export function Code(props) {
-  return <code>
+  return <code className={styles.code}>
     name: {NAME}<br />
     server.url.href: {props.url.href}<br />
-    __VERSION__: <a href={`${props.__VERSION__}.js`}>{props.__VERSION__}</a><br />
+    __VERSION__: <a href={`${__webpack_public_path__}${props.__VERSION__}.js`}>{props.__VERSION__}</a><br />
     <a href={`${props.href}${props.url.search || ""}`}>{props.href}</a>
   </code>;
 }

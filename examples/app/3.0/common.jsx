@@ -1,6 +1,7 @@
 import {createContext, createRef, useContext} from "react";
-import styled, {createGlobalStyle} from "styled-components";
 import {Link} from "react-router-dom";
+import styled from "styled-components";
+import styles from "./Code.css";
 import {useLocation} from "react-router";
 
 export const DivWrapper = styled.div`
@@ -20,25 +21,15 @@ export const DivWrapper = styled.div`
     text-align: ${props => props.align};
     font-size: .5em;
     margin: .5rem;
-    color: ${props => props.color}
-  }
-`;
-
-export const GlobalStyle = createGlobalStyle`
-  * {
-    margin:0;
-  }
-  html, body, body>div {
-    height:100%;
   }
 `;
 
 export function Code(props) {
   const location = useLocation();
-  return <code>
+  return <code className={styles.code}>
     name: {NAME}<br />
     server.url.href: {props.url.href}<br />
-    __VERSION__: <a href={`${props.__VERSION__}.js`}>{props.__VERSION__}</a><br />
+    __VERSION__: <a href={`${__webpack_public_path__}${props.__VERSION__}.js`}>{props.__VERSION__}</a><br />
     <Link to={`/${props.to}${location.search || ""}`}>{props.to}</Link>
   </code>;
 }

@@ -1,8 +1,10 @@
 /* eslint-disable prefer-named-capture-group, require-unicode-regexp, max-lines-per-function */
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const {DefinePlugin} = require("webpack");
 const packageJson = require("../../package.json");
+const {PLUGIN_NAME} = require("../../src");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
@@ -53,7 +55,21 @@ module.exports = (env, argv) => {
         },
         {
           "test":/\.css$/,
-          "use":[{"loader": MiniCssExtractPlugin.loader},{"loader":"css-loader"}],
+          "use": (info) => {
+            const isNode = info.compiler === PLUGIN_NAME;
+            return (isNode ? [] : [{"loader": MiniCssExtractPlugin.loader}])
+              .concat([
+                {
+                  "loader":"css-loader",
+                  "ident": "css-loader",
+                  "options": {
+                    "modules": {
+                      "exportOnlyLocals": isNode,
+                    },
+                  },
+                },
+            ]);
+          },
         },
       ],
     },
@@ -69,6 +85,7 @@ module.exports = (env, argv) => {
               },
             },
           }),
+          new CssMinimizerPlugin(),
         ]
         : [],
       "splitChunks": {

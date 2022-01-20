@@ -17,8 +17,8 @@ export default async (props = {}) => {
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width,initial-scale=1" />
-      <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII="></link>
-      <style dangerouslySetInnerHTML={{"__html": __SOURCES__["b.web.css"]}}></style>
+      <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII=" />
+      <link integrity={__DIGESTS__["b.web.css"]} rel="stylesheet" href={`${__webpack_public_path__}/${__FILES__["b.web.css"]}`} />
       <script dangerouslySetInnerHTML={{"__html": `globalThis.props = ${JSON.stringify(props).replace(/</g, "\\u003c")}`}} />
       <script dangerouslySetInnerHTML={{"__html": __SOURCES__["b.web.js"]}} />
       {sheet.getStyleElement()}
