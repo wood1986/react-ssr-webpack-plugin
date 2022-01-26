@@ -1,4 +1,5 @@
-import {Code, DivWrapper, GlobalStyle, NotFound} from "./common";
+import "./App.css";
+import {Code, DivWrapper, NotFound} from "./common";
 import {Route, Routes} from "react-router-dom";
 import {StrictMode, Suspense, lazy} from "react";
 import svg from "../react.svg";
@@ -8,10 +9,9 @@ const Img = lazy(() => import("./Img"));
 
 export function App(props) {
   return <StrictMode>
-    <GlobalStyle />
     <Routes>
       <Route path="a.node" element={
-        <DivWrapper flexDirection="column" color="#d63384" align={"center"}>
+        <DivWrapper flexDirection="column" align={"center"}>
           <Suspense fallback={<div>loading...</div>}>
             <Img />
           </Suspense>

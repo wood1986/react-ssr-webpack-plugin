@@ -1,4 +1,5 @@
-import {Code, DivWrapper, GlobalStyle} from "../common";
+import "../App.css";
+import {Code, DivWrapper} from "../common";
 import {StrictMode, Suspense, lazy} from "react";
 import styled from "styled-components";
 
@@ -16,7 +17,6 @@ const Img = lazy(() => import("./Img"));
 
 export function App(props) {
   return <StrictMode>
-    <GlobalStyle />
     <DivWrapperB flexDirection="row">
       <Suspense fallback={<div>loading...</div>}>
         <Img />
