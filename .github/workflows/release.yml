@@ -20,7 +20,6 @@ jobs:
           git config user.email '/'
           yarn
           yarn release
-          rm README.md
           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
           npm publish --access public
           git push origin main --follow-tags
