@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/wood1986/react-ssr-webpack-plugin/compare/v2.2.0...v2.2.1) (2022-01-30)
+
+
+### Bug Fixes
+
+* add css modules example ([#23](https://github.com/wood1986/react-ssr-webpack-plugin/issues/23)) ([5b10fcf](https://github.com/wood1986/react-ssr-webpack-plugin/commit/5b10fcfabf0cc13b6bd7121bf94563b21c3f91c6))
+* fix stylelint-webpack-plugin error ([#25](https://github.com/wood1986/react-ssr-webpack-plugin/issues/25)) ([8009978](https://github.com/wood1986/react-ssr-webpack-plugin/commit/8009978e6a16639b8f5ff1d6ef9fa6e447ae1dd0))
+* remove ReactSSRResponse ([#19](https://github.com/wood1986/react-ssr-webpack-plugin/issues/19)) ([7e918f1](https://github.com/wood1986/react-ssr-webpack-plugin/commit/7e918f1e5bcdd87ab55acd3a1de43af22ec4d41d))
+* update <Code /> and fix null querystring in app/2.0 ([#21](https://github.com/wood1986/react-ssr-webpack-plugin/issues/21)) ([ee27251](https://github.com/wood1986/react-ssr-webpack-plugin/commit/ee2725117b541c8819b740d0b1ff9c218e8985f1))
+* update release.yml ([#26](https://github.com/wood1986/react-ssr-webpack-plugin/issues/26)) ([6c792b8](https://github.com/wood1986/react-ssr-webpack-plugin/commit/6c792b8b8f23b10538c7c9dfbc3c83aabfebf1b8))
+
 ## [2.2.0](https://github.com/wood1986/react-ssr-webpack-plugin/compare/v2.1.0...v2.2.0) (2021-12-27)
 
 
