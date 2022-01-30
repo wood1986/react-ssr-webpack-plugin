@@ -8,6 +8,7 @@ const {PLUGIN_NAME} = require("../../src");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const StylelintPlugin = require("stylelint-webpack-plugin");
 
 module.exports = (env, argv) => {
   const PROD = argv.mode === "production";
@@ -107,6 +108,10 @@ module.exports = (env, argv) => {
       new ESLintPlugin({
         "overrideConfigFile": path.resolve(__dirname, "..", "..", ".eslintrc.js"),
         "extensions": ["jsx", "mjs", "cjs", "js"],
+        "fix": true,
+      }),
+      new StylelintPlugin({
+        "configFile": path.resolve(__dirname, "..", "..", ".stylelintrc.json"),
         "fix": true,
       }),
       new MiniCssExtractPlugin({

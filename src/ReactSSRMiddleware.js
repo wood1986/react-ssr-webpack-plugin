@@ -22,7 +22,10 @@ function unionFs(fss) {
       }
 
       if (errors.length == fss.length) {
-        throw new Error(`all fs.${key} throw an exception.`);
+        // 1. some third party relies on the exception
+        // and error code such as stylelint-webpack-plugin
+        // 2. return error created by fs not ufs
+        throw errors[errors.length - 1];
       }
     };
   }
