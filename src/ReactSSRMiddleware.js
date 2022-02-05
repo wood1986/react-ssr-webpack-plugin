@@ -37,6 +37,85 @@ function unionFs(fss) {
   };
 }
 
+/**
+ * @callback ReactSSRMiddleware~Function
+ * @param {Object} req -
+ * The request object
+ *
+ * @param {Object} res -
+ * The response object
+ *
+ * @returns {Promise<void>}
+ */
+
+/**
+ * @typedef {Object} ReactSSRMiddleware~Config
+ * @property {ReactSSRMiddleware~Config~PatchGlobal} patchGlobal
+ * This callback allows you to patch global object without bundling
+ * a dependency to the server chunk but you need it at runtime. For example,
+ * if cloudflare worker is the production environment, you do not need
+ * to include fetch to the server chunk because fetch is runtime api
+ * But you need it in your local development environment.
+ * Default is `() => {}`
+ *
+ * @property {ReactSSRMiddleware~Config~ReqToProps} reqToProps
+ * This callback allows you to convert the request object
+ * to ***a plain object*** before passing to `<App {...props} />`.
+ * If it does not return a plain object, it will return http 500 error.
+ * Default is `() => ({})`
+ *
+ * @property {ReactSSRMiddleware~Config~ResultToRes} resultToRes
+ * This callback allows you to define your own function to perform http response
+ * Default callback supports status code and body.
+ *
+ * @property {string} version
+ * The version of the JS entry to be executed.
+ * If you customize `version` in plugin options,
+ * you need to put same value here.
+ * Default is `manifest`
+ */
+
+/**
+ * @callback ReactSSRMiddleware~Config~ReqToProps
+ * @param {Object} req
+ * The request object
+ *
+ * @returns {Object} The plain object
+ */
+
+/**
+ * @callback ReactSSRMiddleware~Config~ResultToRes
+ * @param {Object} res
+ * The response object
+ *
+ * @param {Object} result
+ * The result object from the entry
+ *
+ * @returns {void}
+ */
+
+/**
+ * @callback ReactSSRMiddleware~Config~PatchGlobal
+ * @param {Object} global
+ * The environment global object
+ *
+ * @returns {void}
+ */
+
+/**
+ * A custom webpack-dev-server middleware for performing server side rendering
+ * and live reload when server code has modification
+ * @function ReactSSRMiddleware
+ * @param {Object} compiler
+ * The webpack compiler
+ *
+ * @param {ReactSSRMiddleware~Config} config
+ * The middleware config
+ *
+ * @returns {ReactSSRMiddleware~Function}
+ * The middleware function
+ */
+
 function ReactSSRMiddleware(
   compiler,
   {

@@ -63,6 +63,7 @@
     "graphql": "^16.3.0",
     "husky": "^7.0.4",
     "jest": "^27.4.7",
+    "jsdoc-to-markdown": "^7.1.0",
     "mini-css-extract-plugin": "^2.5.3",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.6",

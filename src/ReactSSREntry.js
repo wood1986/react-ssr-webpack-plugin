@@ -2,6 +2,42 @@
 const {match} = require("path-to-regexp");
 const {isPlainObject} = require("is-plain-object");
 
+/**
+ * @typedef {Object} ReactSSREntry~Config
+ * @property {Object} props
+ * The plain object to be passed to `<App {...props} />`
+ *
+ * @property {function} require
+ * The require function for loading a node module
+ *
+ * @property {string} workdir
+ * The working directory holding all the JS entries
+ *
+ * @property {URL} url
+ * The URL object after parsing the request url
+ *
+ * @property {string} version
+ * The version of the JS entry to be executed
+ */
+
+/**
+ * @typedef {Object} ReactSSREntry~Result
+ * @property {string} body
+ * The require function for loading a node module
+ *
+ * @property {number} statusCode
+ * The working directory holding all the JS entries
+ */
+
+/**
+ * Determine and run a specific version of an entry
+ * @async
+ * @function ReactSSREntry
+ * @param {ReactSSREntry~Config} config
+ * The entry config
+ * @returns {Promise.<ReactSSREntry~Result>} The entry chunk result
+ */
+
 async function ReactSSREntry({require, workdir, props, url, version}) {
   try {
     if (!isPlainObject(props)) {
