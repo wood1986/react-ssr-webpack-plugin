@@ -52,10 +52,11 @@ function unionFs(fss) {
  * @typedef {Object} ReactSSRMiddleware~Config
  * @property {ReactSSRMiddleware~Config~PatchGlobal} patchGlobal
  * This callback allows you to patch global object without bundling
- * a dependency to the server chunk but you need it at runtime. For example,
+ * a dependency to the server chunk. You need it in the local development
+ * but you do not need it in the production environment. For example,
  * if cloudflare worker is the production environment, you do not need
- * to include fetch to the server chunk because fetch is runtime api
- * But you need it in your local development environment.
+ * to include fetch to the server chunk because fetch is availabe in
+ * worker environment.
  * Default is `() => {}`
  *
  * @property {ReactSSRMiddleware~Config~ReqToProps} reqToProps
